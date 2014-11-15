@@ -1,9 +1,10 @@
+require "animated_sprite"
 local MOVE_SPEED = 200
 local DEADZONE = .2
 
 function Player(input)
 
-	local animation = AnimatedSprite:create("blue_astroman.png",32 , 32, 3, 1)
+	local animation = AnimatedSprite:create("hero.png", 32, 32, 4, 1)
 	local player = {
 		x = 0,
 		y = 0,
@@ -79,11 +80,12 @@ function Player(input)
 				--Stop moving
 				self.animation:set_animation(false)
 			else 
+				self.animation:set_animation(true)
 				self.animation:update(dt)
+				-- aim player in correct direction
+				self.direction = math.atan2(velY, velX) + 3.0*math.pi/2.0
 			end
 				
-		-- aim player in correct direction
-		self.direction = math.atan2(velX, velY)
 		-- Move collider to new location (on X axis)
 		self.x = self.x + velX
 		self.collider:moveTo(self.x, self.y)
@@ -125,10 +127,10 @@ function Player(input)
 	end
 
 	function player:draw()
-		love.graphics.setColor(255, 0, 0)
-		self.collider:draw("fill")
-		--self.animation:draw(self.x, self.y, self.direction)
-		self.animation:draw(10,10,10)
+		love.graphics.setColor(145, 145, 145)
+		--self.collider:draw("fill")
+		self.animation:draw(self.x, self.y, self.direction)
+		print (self.direction)
 	end
 
 	return player
