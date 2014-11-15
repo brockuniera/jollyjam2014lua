@@ -17,16 +17,19 @@ function Ship(layout)
 		back = false,
 		forward = false
 	}
+	ship.image = love.graphics.newImage("images/Body_Small.png")
 
 	for i, layer in ipairs(layout.layers) do
 		if layer.name == "ground" then
 			for j, obj in ipairs(layer.objects) do
-				collider = shapes.newPolygonShape(
-					obj.x, obj.y,
-					obj.x + obj.width, obj.y,
-					obj.x + obj.width, obj.y + obj.height,
-					obj.x, obj.y + obj.height
-				)
+				points = {}
+				for i, point in ipairs(obj.polygon) do
+					table.insert(points, obj.x + point.x)
+					table.insert(points, obj.y + point.y)
+				end
+
+				collider = shapes.newPolygonShape(unpack(points))
+
 				table.insert(ship.colliders, collider)
 			end
 		elseif layer.name == "spawns" then
@@ -69,10 +72,12 @@ function Ship(layout)
 	end
 
 	function ship:draw()
-		for i, collider in ipairs(self.colliders) do
+		love.graphics.setColor(255,255,255)
+		love.graphics.draw(self.image, 428, 115)
+		--[[for i, collider in ipairs(self.colliders) do
 			love.graphics.setColor(150, 150, 150)
 			collider:draw("fill")
-		end
+		end]]--
 	end
 
 	return ship

@@ -1,24 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="64" height="36" tilewidth="20" tileheight="20">
+ <imagelayer name="ship" x="428" y="115">
+  <image source="../images/Body_Small.png"/>
+ </imagelayer>
  <objectgroup name="ground">
-  <object x="453.681" y="80.1432" width="399.991" height="160.213"/>
-  <object x="396.294" y="352.498" width="516.652" height="219.622"/>
-  <object x="610.399" y="213.514" width="66.8699" height="140.968"/>
-  <object x="190.907" y="175.835" width="173.323" height="296.408"/>
-  <object x="977.141" y="170.811" width="185.883" height="301.432"/>
-  <object x="281.336" y="266.265" width="761.115" height="62.7983"/>
+  <object x="592" y="239.333">
+   <polygon points="0,0 17.3333,-107.333 43.3333,-116 81.3333,-114 136.667,-100 160.667,-90.6667 174.545,0.727273"/>
+  </object>
+  <object x="768" y="240.667">
+   <polygon points="36.4167,7.14583 90.6667,-52 124.667,-17.3333 152,18 166.667,54.6667 164.667,90.6667 149.333,117.333 119.333,156 97.3333,182.667 38,112"/>
+  </object>
+  <object x="766.667" y="362">
+   <polygon points="0,0 -15.3333,101.333 -85.3333,121.333 -126,126 -157.333,124 -175.333,11.3333"/>
+  </object>
+  <object x="551.333" y="247.333">
+   <polygon points="0,0 -62,-66.6667 -78.6667,-56.6667 -96,-26 -109.333,13.3333 -116,64.6667 -109.333,118 -87.3333,164 -61.3333,186.667 0,116"/>
+  </object>
+  <object x="551.333" y="247.333">
+   <polygon points="0,0 41.3333,-10 215.485,-7.21212 253.271,0.354167 254.667,106.667 216,116 40,126.667 0,118.667"/>
+  </object>
  </objectgroup>
  <objectgroup name="spawns">
-  <object x="1020.11" y="228.846"/>
-  <object x="1096.71" y="407.135"/>
-  <object x="1051.41" y="386.243"/>
-  <object x="1008.8" y="366.326"/>
+  <object x="675.109" y="222.846"/>
+  <object x="833.71" y="347.135"/>
+  <object x="682.41" y="379.243"/>
+  <object x="532.801" y="303.326"/>
  </objectgroup>
  <objectgroup color="#2aa400" name="navigation">
-  <object type="left" x="1100" y="230" width="42" height="40"/>
-  <object type="back" x="1051" y="274" width="42" height="40"/>
-  <object type="right" x="1098" y="321" width="42" height="40"/>
-  <object type="forward" x="1099" y="276" width="42" height="40"/>
+  <object type="left" x="856" y="241" width="42" height="40"/>
+  <object type="back" x="808" y="287" width="42" height="40"/>
+  <object type="right" x="856" y="332" width="42" height="40"/>
+  <object type="forward" x="856" y="287" width="42" height="40"/>
  </objectgroup>
  <objectgroup name="weapons"/>
 </map>
