@@ -7,6 +7,7 @@ objects = {}
 local Player = require "player"
 local Ship = require "ship"
 local Navigation = require "navigation"
+local Background = require "background"
 
 
 function love.load()
@@ -14,6 +15,7 @@ function love.load()
 
 	objects.ship = Ship(layout)
 	objects.navigation = Navigation(layout)
+	objects.background = Background()
 	objects.players = {}
 	--objects.player = Player("keyboard")
 end
@@ -58,6 +60,7 @@ function love.update(dt)
 end
 
 function love.draw()
+	objects.background:draw()
 	objects.ship:draw()
 	for i, nav in ipairs(objects.navigation) do
 		nav:draw()
