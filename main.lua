@@ -1,3 +1,15 @@
+Player = require "player"
+
+objects = {}
+
+function love.load()
+	objects.player = Player()
+end
+
+function love.update(dt)
+	objects.player:update(dt)
+end
+
 function love.draw()
-    love.graphics.print('Hello World!', 400, 300)
+	objects.player:draw()
 end
