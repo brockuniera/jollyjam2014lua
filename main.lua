@@ -14,6 +14,7 @@ function love.load()
 end
 
 function love.keypressed(key)
+	-- Add player when someone presses space
 	if key == " " then
 		for i, player in ipairs(objects.players) do
 			if player.input == "keyboard" then
@@ -27,8 +28,18 @@ function love.keypressed(key)
 end
 
 function love.joystickpressed(joystick, button)
-	print(joystick:getGamepadMapping(button))
-	print "test"
+	-- Add player when someone presses A
+	local inputType, aIndex = joystick:getGamepadMapping("a")
+	if button == aIndex then
+		for i, player in ipairs(objects.players) do
+			if player.input == joystick then
+				-- There's already a player with this joystick
+				return
+			end
+		end
+		-- No player has this joystick yet
+		table.insert(objects.players, Player(joystick))
+	end
 end
 
 function love.update(dt)

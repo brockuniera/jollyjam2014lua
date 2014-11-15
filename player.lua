@@ -1,4 +1,5 @@
 local MOVE_SPEED = 200
+local DEADZONE = .2
 
 function Player(input)
 	local player = {
@@ -25,7 +26,7 @@ function Player(input)
 	end
 
 	-- Pick a spawn point
-	spawn = lume.randomchoice(ship.spawns)
+	spawn = ship:getSpawn()
 	player.x = spawn.x
 	player.y = spawn.y
 
@@ -45,6 +46,18 @@ function Player(input)
 				velY = -MOVE_SPEED * dt
 			elseif love.keyboard.isDown("s") then
 				velY = MOVE_SPEED * dt
+			end
+		else
+			-- Controller input
+			velX = self.input:getGamepadAxis("leftx")
+			velY = self.input:getGamepadAxis("lefty")
+
+			-- Deadzone
+			if math.abs(velX) < DEADZONE then
+				velX = 0
+			end
+			if math.abs(velY) < DEADZONE then
+				velY = 0
 			end
 		end
 

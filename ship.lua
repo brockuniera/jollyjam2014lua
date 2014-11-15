@@ -17,7 +17,17 @@ function Ship()
 			end
 		elseif layer.name == "spawns" then
 			ship.spawns = layer.objects
+			lume.shuffle(ship.spawns)
 		end
+	end
+
+	function ship:getSpawn()
+		-- pop a spawn
+		spawn = table.remove(self.spawns, 1)
+		-- push it to other end
+		table.insert(self.spawns, spawn)
+
+		return spawn
 	end
 
 	function ship:update(dt)
