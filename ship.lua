@@ -1,7 +1,22 @@
+local ACCEL = 1
+local TURN_SPEED = math.pi * .01
+local MAX_SPEED = 20
+
 function Ship(layout)
-	local ship = {}
+	local ship = {
+		angle = 0,
+		x = 0,
+		y = 0,
+		velocity = 0
+	}
 
 	ship.colliders = {}
+	ship.controls = {
+		left = false,
+		right = false,
+		back = false,
+		forward = false
+	}
 
 	for i, layer in ipairs(layout.layers) do
 		if layer.name == "ground" then
@@ -30,7 +45,27 @@ function Ship(layout)
 	end
 
 	function ship:update(dt)
+		-- Navigation controls
+		if self.controls.forward then
+			self.velocity = self.velocity + ACCEL * dt
+		end
+		if self.controls.back then
+			self.velocity = self.velocity - ACCEL * dt
+		end
+		if self.controls.left then
+			self.angle = self.angle - TURN_SPEED * dt
+		end
+		if self.controls.right then
+			self.angle = self.angle + TURN_SPEED * dt
+		end
 
+		-- Calculate velocity
+		local xVel = math.cos(self.angle) * self.velocity
+		local yVel = math.sin(self.angle) * self.velocity
+
+		-- Apply velocity
+		self.x = self.x + xVel
+		self.y = self.y + yVel
 	end
 
 	function ship:draw()

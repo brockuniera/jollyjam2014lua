@@ -1,5 +1,6 @@
-function Button(x, y, width, height)
+function Button(type, x, y, width, height)
 	local button = {
+		type = type,
 		x = x,
 		y = y,
 		width = width,
@@ -25,6 +26,8 @@ function Button(x, y, width, height)
 				self.pressed = true
 			end
 		end
+		-- Pass input to ship
+		objects.ship.controls[self.type] = self.pressed
 	end
 
 	function button:draw()

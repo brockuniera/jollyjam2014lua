@@ -6,6 +6,7 @@ function Navigation(layout)
 		if layer.name == "navigation" then
 			for j, obj in ipairs(layer.objects) do
 					table.insert(buttons, Button(
+						obj.type,
 						obj.x, obj.y, obj.width, obj.height
 					))
 			end
