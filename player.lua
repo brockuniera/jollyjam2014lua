@@ -1,12 +1,14 @@
 local MOVE_SPEED = 200
 
-function Player()
+function Player(input)
 	local player = {
 		x = 0,
 		y = 0,
 		width = 10,
 		height = 10
 	}
+
+	player.input = input
 
 	-- Collider
 	player.collider = shapes.newPolygonShape(
@@ -30,16 +32,20 @@ function Player()
 	function player:update(dt)
 		local velX = 0
 		local velY = 0
-		if love.keyboard.isDown("d") then
-			velX = MOVE_SPEED * dt
-		elseif love.keyboard.isDown("a") then
-			velX = -MOVE_SPEED * dt
-		end
 
-		if love.keyboard.isDown("w") then
-			velY = -MOVE_SPEED * dt
-		elseif love.keyboard.isDown("s") then
-			velY = MOVE_SPEED * dt
+		if self.input == "keyboard" then
+			-- Keyboard input
+			if love.keyboard.isDown("d") then
+				velX = MOVE_SPEED * dt
+			elseif love.keyboard.isDown("a") then
+				velX = -MOVE_SPEED * dt
+			end
+
+			if love.keyboard.isDown("w") then
+				velY = -MOVE_SPEED * dt
+			elseif love.keyboard.isDown("s") then
+				velY = MOVE_SPEED * dt
+			end
 		end
 
 		-- Move collider to new location (on X axis)
