@@ -1,5 +1,5 @@
-require "animated_sprite"
 local MOVE_SPEED = 200
+local DEADZONE = .2
 
 function Player(input)
 
@@ -40,7 +40,7 @@ function Player(input)
 	end
 
 	-- Pick a spawn point
-	spawn = lume.randomchoice(ship.spawns)
+	spawn = ship:getSpawn()
 	player.x = spawn.x
 	player.y = spawn.y
 
@@ -61,6 +61,19 @@ function Player(input)
 			elseif love.keyboard.isDown("s") then
 				velY = MOVE_SPEED * dt
 			end
+		else
+			-- Controller input
+			velX = self.input:getGamepadAxis("leftx")
+			velY = self.input:getGamepadAxis("lefty")
+
+			-- Deadzone
+			if math.abs(velX) < DEADZONE then
+				velX = 0
+			end
+			if math.abs(velY) < DEADZONE then
+				velY = 0
+			end
+		end
 
 			if(velX == 0.0 and velY == 0.0) then
 				--Stop moving
@@ -68,8 +81,7 @@ function Player(input)
 			else 
 				self.animation:update(dt)
 			end
-		end
-		
+				
 		-- aim player in correct direction
 		self.direction = math.atan2(velX, velY)
 		-- Move collider to new location (on X axis)
