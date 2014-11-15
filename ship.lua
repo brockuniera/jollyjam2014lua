@@ -20,7 +20,7 @@ function Ship()
 	end
 
 	function ship:update(dt)
-
+		
 	end
 
 	function ship:draw()

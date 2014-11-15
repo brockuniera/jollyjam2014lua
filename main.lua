@@ -1,7 +1,10 @@
-Player = require "player"
-Ship = require "ship"
-
+-- Globals
+lume = require "lib.lume"
 objects = {}
+
+-- Constructors
+local Player = require "player"
+local Ship = require "ship"
 
 function love.load()
 	objects.ship = Ship()

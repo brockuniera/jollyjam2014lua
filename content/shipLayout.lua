@@ -56,10 +56,10 @@ return {
           name = "",
           type = "",
           shape = "rectangle",
-          x = 352.835,
-          y = 0,
-          width = 522.052,
-          height = 216.022,
+          x = 380.835,
+          y = 50,
+          width = 518.052,
+          height = 120.022,
           rotation = 0,
           visible = true,
           properties = {}
@@ -84,6 +84,51 @@ return {
           y = 468.047,
           width = 516.652,
           height = 219.622,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        }
+      }
+    },
+    {
+      type = "objectgroup",
+      name = "spawns",
+      visible = true,
+      opacity = 1,
+      properties = {},
+      objects = {
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 1046,
+          y = 344,
+          width = 0,
+          height = 0,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 512,
+          y = 96,
+          width = 0,
+          height = 0,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 506,
+          y = 584,
+          width = 0,
+          height = 0,
           rotation = 0,
           visible = true,
           properties = {}

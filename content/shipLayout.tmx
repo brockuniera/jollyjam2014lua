@@ -4,13 +4,13 @@
   <object x="837.084" y="244.824" width="309.631" height="253.825"/>
   <object x="514.851" y="324.032" width="442.844" height="97.2097"/>
   <object x="567.057" y="109.811" width="113.411" height="262.826"/>
-  <object x="352.835" y="0" width="522.052" height="216.022"/>
+  <object x="380.835" y="50" width="518.052" height="120.022"/>
   <object x="583.258" y="390.639" width="118.812" height="181.818"/>
   <object x="255.626" y="468.047" width="516.652" height="219.622"/>
  </objectgroup>
  <objectgroup name="spawns">
   <object x="1046" y="344"/>
-  <object x="512" y="54"/>
+  <object x="512" y="96"/>
   <object x="506" y="584"/>
  </objectgroup>
 </map>

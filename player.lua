@@ -1,4 +1,4 @@
-local MOVE_SPEED = 50
+local MOVE_SPEED = 200
 
 function Player()
 	local player = {
@@ -7,6 +7,15 @@ function Player()
 		width = 10,
 		height = 10
 	}
+
+	-- Pick a spawn point
+	ship = objects.ship
+	if ship then
+		spawn = lume.randomchoice(ship.spawns)
+		player.x = spawn.x
+		player.y = spawn.y
+		print(player.x, player.y)
+	end
 
 	function player:update(dt)
 		if love.keyboard.isDown("d") then
@@ -23,6 +32,7 @@ function Player()
 	end
 
 	function player:draw()
+		love.graphics.setColor(255, 0, 0)
 		love.graphics.rectangle("fill",
 			self.x, self.y, self.width, self.height)
 	end
