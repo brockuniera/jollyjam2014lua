@@ -1,12 +1,27 @@
+require "animated_sprite"
 local MOVE_SPEED = 200
 
 function Player(input)
+
+	local animation = AnimatedSprite:create("blue_astroman.png",32 , 32, 3, 1)
 	local player = {
 		x = 0,
 		y = 0,
-		width = 10,
-		height = 10
+	animation = animation,
+	width =  animation.width,
+	height = animation.height,
+	Directions = {
+		["Right"] = 0,
+		["Up"] = 1,
+		["Left"] = 2,
+		["Down"] = 3
+	},
+	direction = 0.0
+
 	}
+
+	--Load sprite lists for animation
+	player.animation:load()
 
 	player.input = input
 
@@ -46,8 +61,17 @@ function Player(input)
 			elseif love.keyboard.isDown("s") then
 				velY = MOVE_SPEED * dt
 			end
-		end
 
+			if(velX == 0.0 and velY == 0.0) then
+				--Stop moving
+				self.animation:set_animation(false)
+			else 
+				self.animation:update(dt)
+			end
+		end
+		
+		-- aim player in correct direction
+		self.direction = math.atan2(velX, velY)
 		-- Move collider to new location (on X axis)
 		self.x = self.x + velX
 		self.collider:moveTo(self.x, self.y)
@@ -91,6 +115,8 @@ function Player(input)
 	function player:draw()
 		love.graphics.setColor(255, 0, 0)
 		self.collider:draw("fill")
+		--self.animation:draw(self.x, self.y, self.direction)
+		self.animation:draw(10,10,10)
 	end
 
 	return player
