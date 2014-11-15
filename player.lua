@@ -8,33 +8,83 @@ function Player()
 		height = 10
 	}
 
-	-- Pick a spawn point
+	-- Collider
+	player.collider = shapes.newPolygonShape(
+		player.x, player.y,
+		player.x + player.width, player.y,
+		player.x + player.width, player.y + player.height,
+		player.x, player.y + player.height
+	)
+
+	-- Get ref to ship
 	ship = objects.ship
-	if ship then
-		spawn = lume.randomchoice(ship.spawns)
-		player.x = spawn.x
-		player.y = spawn.y
-		print(player.x, player.y)
+	if ship == nil then
+		assert(false, "Must load ship before player")
 	end
 
+	-- Pick a spawn point
+	spawn = lume.randomchoice(ship.spawns)
+	player.x = spawn.x
+	player.y = spawn.y
+
 	function player:update(dt)
+		local velX = 0
+		local velY = 0
 		if love.keyboard.isDown("d") then
-			self.x = self.x + MOVE_SPEED * dt
+			velX = MOVE_SPEED * dt
 		elseif love.keyboard.isDown("a") then
-			self.x = self.x - MOVE_SPEED * dt
+			velX = -MOVE_SPEED * dt
 		end
 
 		if love.keyboard.isDown("w") then
-			self.y = self.y - MOVE_SPEED * dt
+			velY = -MOVE_SPEED * dt
 		elseif love.keyboard.isDown("s") then
-			self.y = self.y + MOVE_SPEED * dt
+			velY = MOVE_SPEED * dt
 		end
+
+		-- Move collider to new location (on X axis)
+		self.x = self.x + velX
+		self.collider:moveTo(self.x, self.y)
+
+		-- Make sure it still collides with ship
+		local collision = false
+		for i, shipCollider in ipairs(ship.colliders) do
+			if self.collider:collidesWith(shipCollider) then
+				-- There was a collision
+				collision = true
+				break
+			end
+		end
+
+		if not collision then
+			-- Reset position
+			self.x = self.x - velX
+		end
+
+		-- Do same for Y axis
+		self.y = self.y + velY
+		self.collider:moveTo(self.x, self.y)
+
+		-- Make sure it still collides with ship
+		collision = false
+		for i, shipCollider in ipairs(ship.colliders) do
+			if self.collider:collidesWith(shipCollider) then
+				-- There was a collision
+				collision = true
+				break
+			end
+		end
+
+		if not collision then
+			-- Reset position
+			self.y = self.y - velY
+		end
+		self.collider:moveTo(self.x, self.y)
 	end
 
 	function player:draw()
 		love.graphics.setColor(255, 0, 0)
-		love.graphics.rectangle("fill",
-			self.x, self.y, self.width, self.height)
+		self.collider:draw("fill")
 	end
 
 	return player

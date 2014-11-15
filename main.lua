@@ -1,5 +1,6 @@
 -- Globals
 lume = require "lib.lume"
+shapes = require "lib.collider.shapes"
 objects = {}
 
 -- Constructors

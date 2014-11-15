@@ -2,17 +2,18 @@ function Ship()
 	local ship = {}
 	local layout = require "content.shipLayout"
 
-	ship.ground = {}
+	ship.colliders = {}
 
 	for i, layer in ipairs(layout.layers) do
 		if layer.name == "ground" then
 			for j, obj in ipairs(layer.objects) do
-				table.insert(ship.ground, {
-					x = obj.x,
-					y = obj.y,
-					width = obj.width,
-					height = obj.height
-				})
+				collider = shapes.newPolygonShape(
+					obj.x, obj.y,
+					obj.x + obj.width, obj.y,
+					obj.x + obj.width, obj.y + obj.height,
+					obj.x, obj.y + obj.height
+				)
+				table.insert(ship.colliders, collider)
 			end
 		elseif layer.name == "spawns" then
 			ship.spawns = layer.objects
@@ -20,14 +21,13 @@ function Ship()
 	end
 
 	function ship:update(dt)
-		
+
 	end
 
 	function ship:draw()
-		for i, obj in ipairs(self.ground) do
+		for i, collider in ipairs(self.colliders) do
 			love.graphics.setColor(150, 150, 150)
-			love.graphics.rectangle("fill",
-				obj.x, obj.y, obj.width, obj.height)
+			collider:draw("fill")
 		end
 	end
 
