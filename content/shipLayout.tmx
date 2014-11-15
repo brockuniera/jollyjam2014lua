@@ -1,16 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="64" height="36" tilewidth="20" tileheight="20">
  <objectgroup name="ground">
-  <object x="837.084" y="244.824" width="309.631" height="253.825"/>
-  <object x="514.851" y="324.032" width="442.844" height="97.2097"/>
-  <object x="567.057" y="109.811" width="113.411" height="262.826"/>
-  <object x="380.835" y="50" width="518.052" height="120.022"/>
-  <object x="583.258" y="390.639" width="118.812" height="181.818"/>
-  <object x="255.626" y="468.047" width="516.652" height="219.622"/>
+  <object x="453.681" y="80.1432" width="399.991" height="160.213"/>
+  <object x="396.294" y="352.498" width="516.652" height="219.622"/>
+  <object x="610.399" y="213.514" width="77.8699" height="308.968"/>
+  <object x="190.907" y="175.835" width="173.323" height="296.408"/>
+  <object x="977.141" y="170.811" width="185.883" height="301.432"/>
+  <object x="281.336" y="266.265" width="761.115" height="62.7983"/>
  </objectgroup>
  <objectgroup name="spawns">
-  <object x="1046" y="344"/>
-  <object x="512" y="96"/>
-  <object x="506" y="584"/>
+  <object x="640.109" y="168.846"/>
+  <object x="1097.71" y="344.135"/>
+  <object x="507.41" y="472.243"/>
+  <object x="273.801" y="384.326"/>
+ </objectgroup>
+ <objectgroup color="#2aa400" name="navigation">
+  <object type="left" x="1120" y="230" width="42" height="40"/>
+  <object type="back" x="1071" y="274" width="42" height="40"/>
+  <object type="right" x="1118" y="321" width="42" height="40"/>
+  <object type="forward" x="1119" y="276" width="42" height="40"/>
  </objectgroup>
 </map>

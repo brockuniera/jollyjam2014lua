@@ -1,6 +1,5 @@
-function Ship()
+function Ship(layout)
 	local ship = {}
-	local layout = require "content.shipLayout"
 
 	ship.colliders = {}
 
