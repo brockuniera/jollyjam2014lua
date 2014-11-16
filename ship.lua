@@ -1,6 +1,9 @@
-local ACCEL = 1
-local TURN_SPEED = math.pi * .01
-local MAX_SPEED = 20
+SHIP_X = 428
+SHIP_Y = 115
+
+local ACCEL = .5
+local TURN_SPEED = math.pi * .05
+local MAX_SPEED = 50
 
 function Ship(layout)
 	local ship = {
@@ -73,7 +76,7 @@ function Ship(layout)
 
 	function ship:draw()
 		love.graphics.setColor(255,255,255)
-		love.graphics.draw(self.image, 428, 115)
+		love.graphics.draw(self.image)
 		--[[for i, collider in ipairs(self.colliders) do
 			love.graphics.setColor(150, 150, 150)
 			collider:draw("fill")

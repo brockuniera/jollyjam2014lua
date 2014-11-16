@@ -3,12 +3,12 @@ lume = require "lib.lume"
 shapes = require "lib.collider.shapes"
 objects = {}
 
+
 -- Constructors
 local Player = require "player"
 local Ship = require "ship"
 local Navigation = require "navigation"
 local Background = require "background"
-
 
 function love.load()
 	local layout = require "content.shipLayout"
@@ -17,6 +17,7 @@ function love.load()
 	objects.navigation = Navigation(layout)
 	objects.background = Background()
 	objects.players = {}
+
 	--objects.player = Player("keyboard")
 end
 
@@ -60,7 +61,22 @@ function love.update(dt)
 end
 
 function love.draw()
+	love.graphics.push()
+	love.graphics.rotate(-objects.ship.angle)
+	love.graphics.translate(
+		-objects.ship.x,
+		-objects.ship.y
+	)
+
 	objects.background:draw()
+	love.graphics.pop()
+
+	love.graphics.push()
+	love.graphics.translate(
+		love.graphics.getWidth()/2 - 550/2,
+		love.graphics.getHeight()/2 - 381/2
+	)
+	
 	objects.ship:draw()
 	for i, nav in ipairs(objects.navigation) do
 		nav:draw()
@@ -68,4 +84,5 @@ function love.draw()
 	for i, player in ipairs(objects.players) do
 		player:draw()
 	end
+	love.graphics.pop()
 end
