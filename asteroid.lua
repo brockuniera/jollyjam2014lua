@@ -1,10 +1,10 @@
 local TURN_SPEED = math.pi * .1   --base turn speed, randomly chosen
 
 --images are the sprites for the asteroids
-function Asteroid(images)
+function Asteroid(position, images)
 	local asteroid = {
-		x = 500,
-		y = 500,
+		x = position.x,
+		y = position.y,
 		velocity = 0,
 		angle,
 		image,
