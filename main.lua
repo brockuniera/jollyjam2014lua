@@ -9,6 +9,7 @@ local Player = require "player"
 local Ship = require "ship"
 local Navigation = require "navigation"
 local Background = require "background"
+local Minimap = require "minimap"
 
 function love.load()
 	local layout = require "content.shipLayout"
@@ -16,6 +17,7 @@ function love.load()
 	objects.ship = Ship(layout)
 	objects.navigation = Navigation(layout)
 	objects.background = Background()
+	objects.minimap = Minimap()
 	objects.players = {}
 
 	--objects.player = Player("keyboard")
@@ -58,6 +60,7 @@ function love.update(dt)
 		nav:update(dt)
 	end
 	objects.ship:update(dt)
+	objects.minimap:update(dt)
 end
 
 function love.draw()
@@ -85,4 +88,6 @@ function love.draw()
 		player:draw()
 	end
 	love.graphics.pop()
+
+	objects.minimap:draw()
 end

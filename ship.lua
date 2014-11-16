@@ -1,7 +1,7 @@
 SHIP_X = 428
 SHIP_Y = 115
 
-local ACCEL = .5
+local ACCEL = 10
 local MAX_TURN_SPEED = math.pi * .1
 local TURN_ACCEL = math.pi * .0004
 local MAX_SPEED = 50
