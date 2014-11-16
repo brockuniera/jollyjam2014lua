@@ -1,9 +1,13 @@
 require "animated_sprite"
-function GunControl(input, scaling)
-	local animation = AnimatedSprite:create("images/Gun_control.png", 100, 50, 1, 1)
-
+function GunControl(input, scaling, players)
+	local animation
+	if players == 1 then
+		animation = AnimatedSprite:create("images/Gun_control-Right.png", 100, 50, 1, 1)
+	else
+		animation = AnimatedSprite:create("images/Gun_control-Left.png", 100, 50, 1, 1)
+	end
 	local gunControl = {
-		x = 310,
+		x = 290,
 		y = 260,
 		animation = animation,
 		width =  animation.width,
@@ -25,7 +29,7 @@ function GunControl(input, scaling)
 	gunControl.radius = gunControl.height
 	gunControl.pivotx = gunControl.x 
 	gunControl.pivoty = gunControl.y - gunControl.height/2.0
-
+	
 	gunControl.collider = shapes.newPolygonShape(
 	gunControl.x - gunControl.width/2.0, gunControl.y - gunControl.height/2.0,
 	gunControl.x + gunControl.width/2.0, gunControl.y - gunControl.height/2.0,

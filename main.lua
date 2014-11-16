@@ -3,7 +3,19 @@ lume = require "lib.lume"
 shapes = require "lib.collider.shapes"
 objects = {}
 gunShotSound = love.audio.newSource("Sound/Shot1.wav", "static") -- the "static" tells LÖVE to load the file into memory, good for short sound effects
+bigExplosion = love.audio.newSource("Sound/HugeExplosion.wav", "static") -- the "static" tells LÖVE to load the file into memory, good for short sound effects
 music = love.audio.newSource("Sound/TIMES.mp3") -- if "static" is omitted, LÖVE will stream the file from disk, good for longer music tracks
+healthBarGraphic = love.graphics.newImage("images/Health_Bar.png")
+HEALTH_OVERLAY_X = love.graphics.getWidth()/2.0 - 100
+HEALTH_OVERLAY_Y = love.graphics.getHeight() - 100
+SHIELD_OVERLAY_X = love.graphics.getWidth()/2.0 + 100
+SHIELD_OVERLAY_Y = love.graphics.getHeight() - 100
+HEALTH_BAR_X = HEALTH_OVERLAY_X +33
+SHIELD_BAR_X = SHIELD_OVERLAY_X +33 
+HEALTH_BAR_Y = HEALTH_OVERLAY_Y +33
+SHIELD_BAR_Y = SHIELD_OVERLAY_Y +33
+BAR_HEIGHT = 22
+BAR_WIDTH = 133
 music:setLooping()
 
 old_love_audio_play = love.audio.play
@@ -27,6 +39,7 @@ local Background = require "background"
 local Minimap = require "minimap"
 local Shake = require "shake"
 local Enemy = require "enemy"
+local count = 0
 local Asteroid = require "asteroid"
 local AsteroidFields = require "asteroidFields"
 local EnemyBuilder = require "enemyBuilder"
@@ -36,6 +49,7 @@ blur:send("CanvasSize", {love.graphics.getDimensions()})
 
 scale = .5
 
+local AsteroidFields = require "asteroidFields"
 
 function love.load()
 	local layout = require "content.shipLayout"
@@ -82,16 +96,15 @@ function love.keypressed(key)
 			end
 		end
 		-- There is no keyboard player yet. Make one.
+		count = count + 1
 		table.insert(objects.players, Player("keyboard", 2))
-		table.insert(objects.weapons, Gun("keyboard", 2))
-		table.insert(objects.gunControls, GunControl("keyboard", 1.00))
+		table.insert(objects.weapons, Gun("keyboard", 2, count))
+		table.insert(objects.gunControls, GunControl("keyboard", 1.00, count))
 		objects.weapons[#objects.weapons].x =objects.gunControls[#objects.gunControls].x +30
 		objects.weapons[#objects.weapons].y =objects.gunControls[#objects.gunControls].y
-
-	end
 -- Add player when someone presses p
 --TODO this is an adhoc second player
-	if key == "p" then
+	elseif key == "p" then
 		for i, player in ipairs(objects.players) do
 			if player.input == "keyboard2" then
 				-- There's already a keyboard player
@@ -99,12 +112,12 @@ function love.keypressed(key)
 			end
 		end
 		-- There is no keyboard2 player yet. Make one.
+		count = count + 1
 		table.insert(objects.players, Player("keyboard2", 2))
-		table.insert(objects.weapons, Gun("keyboard2", 2))
-		table.insert(objects.gunControls, GunControl("keyboard2", 1.00))
+		table.insert(objects.weapons, Gun("keyboard2", 2, count))
+		table.insert(objects.gunControls, GunControl("keyboard2", 1.00, count))
 		objects.weapons[#objects.weapons].x =objects.gunControls[#objects.gunControls].x +30
 		objects.weapons[#objects.weapons].y =objects.gunControls[#objects.gunControls].y
-
 	end
 end
 
@@ -158,6 +171,7 @@ function love.update(dt)
 		enemy:update(dt)
 	end
 	objects.ship:update(dt)
+	objects.ship.hullStrength = 100
 	objects.background:update(dt)
 	objects.minimap:update(dt)
 	blur:send("Blur", {objects.shake.offsetX, objects.shake.offsetY})
@@ -199,7 +213,6 @@ function love.draw()
 		gun:draw()
 	end
 	for i, thr in ipairs(objects.thrusters) do
-		--assert(i<2)
 		thr:draw()
 	end
 	objects.ship:draw()
@@ -216,7 +229,23 @@ function love.draw()
 	love.graphics.setShader()
 	love.graphics.pop()
 
+		objects.ship.hullStrength =100
+		objects.ship.shieldStrength =35
+	--draw the hull strength bar for the ship
+		local healthWidth = objects.ship.hullStrength/objects.ship.MAX_HULL_STRENGTH*BAR_WIDTH
+		love.graphics.setColor(255,0,255)
+		love.graphics.rectangle( "fill", HEALTH_BAR_X, HEALTH_BAR_Y, healthWidth, BAR_HEIGHT )
 
+		--draw the shield strength bar for the ship
+		local shieldWidth = objects.ship.shieldStrength/objects.ship.MAX_SHIELD_STRENGTH*BAR_WIDTH
+		love.graphics.setColor(0,0,255)
+		love.graphics.rectangle( "fill" , SHIELD_BAR_X, SHIELD_BAR_Y, shieldWidth, BAR_HEIGHT)
+		--draw the overlays to embelish the health bars
+		love.graphics.setColor(255,255,255)
+		love.graphics.draw(healthBarGraphic, HEALTH_OVERLAY_X, HEALTH_OVERLAY_Y)
+		love.graphics.draw(healthBarGraphic, SHIELD_OVERLAY_X, SHIELD_OVERLAY_Y)
+			
+	--love.graphics.setShader()
 	objects.minimap:draw()
 
 
