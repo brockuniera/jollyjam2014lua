@@ -2,7 +2,7 @@
 lume = require "lib.lume"
 shapes = require "lib.collider.shapes"
 objects = {}
-gunShotSound = love.audio.newSource("Sound/shot1.wav", "static") -- the "static" tells LÖVE to load the file into memory, good for short sound effects
+gunShotSound = love.audio.newSource("Sound/Shot1.wav", "static") -- the "static" tells LÖVE to load the file into memory, good for short sound effects
 music = love.audio.newSource("Sound/TIMES.mp3") -- if "static" is omitted, LÖVE will stream the file from disk, good for longer music tracks
 music:setLooping()
 
@@ -25,11 +25,11 @@ local Ship = require "ship"
 local Navigation = require "navigation"
 local Background = require "background"
 local Minimap = require "minimap"
-local Shake = require "shake"
+--local Shake = require "shake"
 local Enemy = require "enemy"
 
-local blur = love.graphics.newShader("lib/blur.frag")
-blur:send("CanvasSize", {love.graphics.getDimensions()})
+--local blur = love.graphics.newShader("lib/blur.frag")
+--blur:send("CanvasSize", {love.graphics.getDimensions()})
 
 scale = 1
 
@@ -45,7 +45,7 @@ function love.load()
 	objects.thrusters = Thrusters(layout)
 	objects.background = Background()
 	objects.minimap = Minimap()
-	objects.shake = Shake()
+	--objects.shake = Shake()
 	objects.players = {}
 	objects.projectiles = {}
 	objects.weapons = {}
@@ -149,9 +149,9 @@ function love.update(dt)
 	objects.ship:update(dt)
 	objects.background:update(dt)
 	objects.minimap:update(dt)
-	blur:send("Blur", {objects.shake.offsetX, objects.shake.offsetY})
+	--blur:send("Blur", {objects.shake.offsetX, objects.shake.offsetY})
 	objects.asteroidFields:update(dt)
-	shake:update(dt)
+	--shake:update(dt)
 end
 
 function love.draw()
@@ -174,11 +174,11 @@ function love.draw()
 
 	love.graphics.push()
 	love.graphics.scale(scale, scale)
-	love.graphics.translate(
-		love.graphics.getWidth()/(scale*2) - 550/2 + objects.shake.offsetX,
-		love.graphics.getHeight()/(scale*2) - 381/2 + objects.shake.offsetY
-	)
-	love.graphics.setShader(blur)
+--	love.graphics.translate(
+--		love.graphics.getWidth()/(scale*2) - 550/2 + objects.shake.offsetX,
+--		love.graphics.getHeight()/(scale*2) - 381/2 + objects.shake.offsetY
+--	)
+--	love.graphics.setShader(blur)
 
 	for i, projectile in ipairs(objects.projectiles) do
 		projectile:draw()
@@ -200,7 +200,7 @@ function love.draw()
 		player:draw()		
 	end
 			
-	love.graphics.setShader()
+	--love.graphics.setShader()
 	love.graphics.pop()
 
 
