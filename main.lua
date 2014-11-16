@@ -5,6 +5,7 @@ objects = {}
 
 -- Constructors
 local Player = require "player"
+local Projectile = require "projectile"
 local Gun = require "gun"
 local GunControl = require "gunControl"
 local Ship = require "ship"
@@ -69,10 +70,17 @@ function love.update(dt)
 		if gunControl.canFire then
 			--print("Firing is possible")
 			objects.weapons[i]:update(gunControl.firingAngle)
-			if gunControl.doesFire then
-				--table.insert(objects.projectiles, Projectile(
-				print("FIRE")
+			if gunControl.doesFire and gunControl.timeSinceFired > gunControl.COOLDOWN then
+				table.insert(objects.projectiles, Projectile(gunControl.pivotx, gunControl.pivoty, gunControl.firingAngle - math.pi/2.0, .125))
+				gunControl.timeSinceFired = 0.0
 			end
+		end
+	end
+	for i, projectile in ipairs(objects.projectiles) do
+		if projectile.life <0 then
+			table.remove(objects.projectiles, i)
+		else
+			projectile:update(dt)
 		end
 	end
 	for i, nav in ipairs(objects.navigation) do
@@ -99,6 +107,9 @@ function love.draw()
 		love.graphics.getHeight()/2 - 381/2
 	)
 
+	for i, projectile in ipairs(objects.projectiles) do
+		projectile:draw()
+	end
 	for i, gun in ipairs(objects.weapons) do
 		gun:draw()
 	end

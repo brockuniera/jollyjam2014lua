@@ -3,7 +3,7 @@ function GunControl(input, scaling)
 	local animation = AnimatedSprite:create("images/Gun_control.png", 100, 50, 1, 1)
 
 	local gunControl = {
-		x = 610,
+		x = 310,
 		y = 260,
 		animation = animation,
 width =  animation.width,
@@ -13,6 +13,8 @@ width =  animation.width,
 		canFire = false,
 		doesFire = false,
 		scaling = scaling,
+		COOLDOWN = 30,
+		timeSinceFired = 0
 	}
 	
 	gunControl.animation:load()
@@ -65,6 +67,7 @@ width =  animation.width,
 		end
 		-- Pass input to ship
 		--objects.ship.controls[self.type] = self.pressed
+		self.timeSinceFired = self.timeSinceFired + dt*100
 	end
 
 	function gunControl:draw()
