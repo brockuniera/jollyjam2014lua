@@ -2,6 +2,7 @@ require "animated_sprite"
 local MOVE_SPEED = 800
 local INITIAL_LIFE = 400
 local DEADZONE = .2
+local bigExplosion = love.audio.newSource("Sound/EnemyDead.wav", "static") -- the "static" tells LÖVE to load the file into memory, good for short sound effects
 
 function Projectile(owner, x, y, lateralOffset, radius, direction, scaling, shipVelocity, shipDirection)
 	local animation = AnimatedSprite:create("images/Fireball_Purple.png", 200, 100,1, 1)
@@ -61,17 +62,15 @@ function Projectile(owner, x, y, lateralOffset, radius, direction, scaling, ship
 				self.collider:moveTo(self.x, self.y)
 				self.life = self.life - dt*100
 				--print(self.life)
-				if self.owner == "player" then
-					for i, enemy in ipairs(objects.enemies) do
-						if self.collider:collidesWith(enemy.collider) then
-							-- Destroy enemy
-							table.remove(objects.enemies, i)
-							self.life = 0
-							break
-						end
+
+				for i, enemy in ipairs(objects.enemies) do
+					if self.collider:collidesWith(enemy.collider) then
+						-- Destroy enemy
+						table.remove(objects.enemies, i)
+						self.life = 0
+						love.audio.play(bigExplosion)
+						break
 					end
-				elseif self.owner == "enemy" then
-					-- ship collision here
 				end
 	end
 
