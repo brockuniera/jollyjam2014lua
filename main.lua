@@ -12,6 +12,7 @@ local Ship = require "ship"
 local Navigation = require "navigation"
 local Background = require "background"
 local Minimap = require "minimap"
+local Shake = require "shake"
 
 function love.load()
 	local layout = require "content.shipLayout"
@@ -20,6 +21,7 @@ function love.load()
 	objects.navigation = Navigation(layout)
 	objects.background = Background()
 	objects.minimap = Minimap()
+	objects.shake = Shake()
 	objects.players = {}
 	objects.projectiles = {}
 	objects.weapons = {}
@@ -87,7 +89,9 @@ function love.update(dt)
 		nav:update(dt)
 	end
 	objects.ship:update(dt)
+	objects.background:update(dt)
 	objects.minimap:update(dt)
+	shake:update(dt)
 end
 
 function love.draw()
@@ -103,8 +107,8 @@ function love.draw()
 
 	love.graphics.push()
 	love.graphics.translate(
-		love.graphics.getWidth()/2 - 550/2,
-		love.graphics.getHeight()/2 - 381/2
+		love.graphics.getWidth()/2 - 550/2 + objects.shake.offsetX,
+		love.graphics.getHeight()/2 - 381/2 + objects.shake.offsetY
 	)
 
 	for i, projectile in ipairs(objects.projectiles) do

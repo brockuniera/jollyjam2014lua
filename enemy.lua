@@ -5,7 +5,7 @@ function Enemy(x, y)
 	}
 
 	function enemy:update(dt)
-
+		
 	end
 
 	function enemy:draw()

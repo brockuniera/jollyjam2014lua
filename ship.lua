@@ -1,12 +1,14 @@
 SHIP_X = 428
 SHIP_Y = 115
 
+local SHAKE_THRESHOLD = 100
 local ACCEL = 10
 local MAX_TURN_SPEED = math.pi * .1
 local TURN_ACCEL = math.pi * .0004
 local MAX_SPEED = 50
 local TURN_MULT = 2
 local DECEL_MULT = 2
+local TURN_DRAG = .995 * 60
 
 function Ship(layout)
 	local ship = {
@@ -85,19 +87,25 @@ function Ship(layout)
 		end
 
 		local turnAccel = TURN_ACCEL
-		
 
+		local applyDrag = true
 		if self.controls.left then
+			applyDrag = false -- only apply drag if there's no movement
 			if self.angleVel > 0 then
 				turnAccel = turnAccel * TURN_MULT
 			end
 			self.angleVel = self.angleVel - turnAccel * dt
 		end
 		if self.controls.right then
+			applyDrag = false -- only apply drag if there's no movement
 			if self.angleVel < 0 then
 				turnAccel = turnAccel * TURN_MULT
 			end
 			self.angleVel = self.angleVel + turnAccel * dt
+		end
+
+		if applyDrag then
+			self.angleVel = self.angleVel * TURN_DRAG * dt
 		end
 
 		-- Calculate velocity
@@ -108,6 +116,11 @@ function Ship(layout)
 		self.x = self.x + xVel
 		self.y = self.y + yVel
 		self.angle = self.angle + self.angleVel
+
+		if self.velocity > SHAKE_THRESHOLD then
+			objects.shake.intensity = self.velocity - SHAKE_THRESHOLD
+			objects.shake.length = 1
+		end
 	end
 
 	function ship:draw()
