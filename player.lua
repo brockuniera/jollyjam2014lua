@@ -157,7 +157,7 @@ function Player(input, scaling)
 	end
 
 	function player:draw()
-		love.graphics.setColor(145, 145, 145)
+		love.graphics.setColor(255, 255, 255)
 		--self.collider:draw("fill")
 		self.animation:draw(self.x, self.y, self.direction, self.scaling)
 	end

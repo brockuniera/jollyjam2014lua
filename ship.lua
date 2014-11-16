@@ -123,6 +123,22 @@ function Ship(layout)
 		end
 	end
 
+	function rotatePoint(point, origin, degrees)
+	    local x = origin.x + ( math.cos(degrees) * (point.x - origin.x) - math.sin(degrees) * (point.y - origin.y) )
+	    local y = origin.y + ( math.sin(degrees) * (point.x - origin.x) + math.cos(degrees) * (point.y - origin.y) )
+	    point.x = x
+	    point.y = y
+	end
+
+	function ship:getCoords()
+		point = {
+			x = love.graphics.getWidth()/(scale*2) + self.x,
+			y = love.graphics.getHeight()/(scale*2) + self.y,
+		}
+		rotatePoint(point, self, self.angle)
+		return point
+	end
+
 	function ship:draw()
 		love.graphics.setColor(255,255,255)
 		love.graphics.draw(self.image)

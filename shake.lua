@@ -19,8 +19,17 @@ function Shake()
 			self.offsetX = lume.clamp(self.offsetX, -MAX_DIST, MAX_DIST)
 			self.offsetY = lume.clamp(self.offsetY, -MAX_DIST, MAX_DIST)
 		else
-			self.offsetX = 0
-			self.offsetY = 0
+			if math.abs(self.offsetX) > 1 then
+				self.offsetX = self.offsetX * .99
+			else
+				self.offsetX = 0
+			end
+
+			if math.abs(self.offsetX) > 1 then
+				self.offsetY = self.offsetY * .99
+			else
+				self.offsetY = 0
+			end
 			self.intensity = 0
 		end
 	end

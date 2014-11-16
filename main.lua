@@ -3,6 +3,7 @@ lume = require "lib.lume"
 shapes = require "lib.collider.shapes"
 objects = {}
 
+
 -- Constructors
 local Player = require "player"
 local Projectile = require "projectile"
@@ -13,6 +14,12 @@ local Navigation = require "navigation"
 local Background = require "background"
 local Minimap = require "minimap"
 local Shake = require "shake"
+local Enemy = require "enemy"
+
+local blur = love.graphics.newShader("lib/blur.frag")
+blur:send("CanvasSize", {love.graphics.getDimensions()})
+
+scale = 1
 
 function love.load()
 	local layout = require "content.shipLayout"
@@ -26,6 +33,9 @@ function love.load()
 	objects.projectiles = {}
 	objects.weapons = {}
 	objects.gunControls = {}
+	objects.enemies = {
+		Enemy(50, 50)
+	}
 	--objects.player = Player("keyboard")
 end
 
@@ -88,28 +98,40 @@ function love.update(dt)
 	for i, nav in ipairs(objects.navigation) do
 		nav:update(dt)
 	end
+	for i, enemy in ipairs(objects.enemies) do
+		enemy:update(dt)
+	end
 	objects.ship:update(dt)
 	objects.background:update(dt)
 	objects.minimap:update(dt)
-	shake:update(dt)
+	objects.shake:update(dt)
+	blur:send("Blur", {objects.shake.offsetX, objects.shake.offsetY})
 end
 
 function love.draw()
 	love.graphics.push()
+	love.graphics.scale(scale, scale)
 	love.graphics.rotate(-objects.ship.angle)
 	love.graphics.translate(
 		-objects.ship.x,
 		-objects.ship.y
 	)
 
-	objects.background:draw({x = objects.ship.x, y = objects.ship.y})
+	objects.background:draw({x = objects.ship.x, y = objects.ship.y})-- Enemies
+	for i, enemy in ipairs(objects.enemies) do
+		enemy:draw()
+	end
+	love.graphics.setColor(255,0,0)
+
 	love.graphics.pop()
 
 	love.graphics.push()
+	love.graphics.scale(scale, scale)
 	love.graphics.translate(
-		love.graphics.getWidth()/2 - 550/2 + objects.shake.offsetX,
-		love.graphics.getHeight()/2 - 381/2 + objects.shake.offsetY
+		love.graphics.getWidth()/(scale*2) - 550/2 + objects.shake.offsetX,
+		love.graphics.getHeight()/(scale*2) - 381/2 + objects.shake.offsetY
 	)
+	love.graphics.setShader(blur)
 
 	for i, projectile in ipairs(objects.projectiles) do
 		projectile:draw()
@@ -127,7 +149,10 @@ function love.draw()
 	for i, player in ipairs(objects.players) do
 		player:draw()
 	end
+	love.graphics.setShader()
 	love.graphics.pop()
 
 	objects.minimap:draw()
+
+
 end
