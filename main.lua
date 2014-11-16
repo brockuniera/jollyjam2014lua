@@ -3,7 +3,19 @@ lume = require "lib.lume"
 shapes = require "lib.collider.shapes"
 objects = {}
 gunShotSound = love.audio.newSource("Sound/Shot1.wav", "static") -- the "static" tells LÖVE to load the file into memory, good for short sound effects
+bigExplosion = love.audio.newSource("Sound/HugeExplosion.wav", "static") -- the "static" tells LÖVE to load the file into memory, good for short sound effects
 music = love.audio.newSource("Sound/TIMES.mp3") -- if "static" is omitted, LÖVE will stream the file from disk, good for longer music tracks
+healthBarGraphic = love.graphics.newImage("images/Health_Bar.png")
+HEALTH_OVERLAY_X = love.graphics.getWidth()/2.0 - 100
+HEALTH_OVERLAY_Y = love.graphics.getHeight() - 100
+SHIELD_OVERLAY_X = love.graphics.getWidth()/2.0 + 100
+SHIELD_OVERLAY_Y = love.graphics.getHeight() - 100
+HEALTH_BAR_X = HEALTH_OVERLAY_X +33
+SHIELD_BAR_X = SHIELD_OVERLAY_X +33 
+HEALTH_BAR_Y = HEALTH_OVERLAY_Y +33
+SHIELD_BAR_Y = SHIELD_OVERLAY_Y +33
+BAR_HEIGHT = 22
+BAR_WIDTH = 133
 music:setLooping()
 
 old_love_audio_play = love.audio.play
@@ -115,7 +127,8 @@ end
 function love.update(dt)
 	for i, player in ipairs(objects.players) do
 		player:update(dt)
-	end
+		
+		end
 	for i, gunControl in ipairs(objects.gunControls) do
 		gunControl:update(dt)
 		if gunControl.canFire then
@@ -147,6 +160,7 @@ function love.update(dt)
 		enemy:update(dt)
 	end
 	objects.ship:update(dt)
+	objects.ship.hullStrength = 100
 	objects.background:update(dt)
 	objects.minimap:update(dt)
 	--blur:send("Blur", {objects.shake.offsetX, objects.shake.offsetY})
@@ -199,11 +213,25 @@ function love.draw()
 	for i, player in ipairs(objects.players) do
 		player:draw()		
 	end
+		love.graphics.pop()
+
+		objects.ship.hullStrength =100
+		objects.ship.shieldStrength =35
+	--draw the hull strength bar for the ship
+		local healthWidth = objects.ship.hullStrength/objects.ship.MAX_HULL_STRENGTH*BAR_WIDTH
+		love.graphics.setColor(255,0,255)
+		love.graphics.rectangle( "fill", HEALTH_BAR_X, HEALTH_BAR_Y, healthWidth, BAR_HEIGHT )
+
+		--draw the shield strength bar for the ship
+		local shieldWidth = objects.ship.shieldStrength/objects.ship.MAX_SHIELD_STRENGTH*BAR_WIDTH
+		love.graphics.setColor(0,0,255)
+		love.graphics.rectangle( "fill" , SHIELD_BAR_X, SHIELD_BAR_Y, shieldWidth, BAR_HEIGHT)
+		--draw the overlays to embelish the health bars
+		love.graphics.setColor(255,255,255)
+		love.graphics.draw(healthBarGraphic, HEALTH_OVERLAY_X, HEALTH_OVERLAY_Y)
+		love.graphics.draw(healthBarGraphic, SHIELD_OVERLAY_X, SHIELD_OVERLAY_Y)
 			
 	--love.graphics.setShader()
-	love.graphics.pop()
-
-
 	objects.minimap:draw()
 
 

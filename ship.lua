@@ -18,7 +18,9 @@ function Ship(layout, level)
 		velocity = 0,
 		angleVel = 0,
 		hullStrength = MAX_HULL_STRENGTH,
-		shieldStrength = MAX_SHIELD_STRENGTH
+		shieldStrength = MAX_SHIELD_STRENGTH,
+		MAX_HULL_STRENGTH = MAX_HULL_STRENGTH,
+		MAX_SHIELD_STRENGTH = MAX_SHIELD_STRENGTH
 		
 	}
 
