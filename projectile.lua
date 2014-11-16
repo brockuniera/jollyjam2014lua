@@ -50,8 +50,8 @@ function Projectile(x, y, lateralOffset, radius, direction, scaling, shipVelocit
 	end
 
 	function projectile:update(dt)
-				self.velX = MOVE_SPEED * dt * math.cos(self.direction) + self.shipVel*dt*math.cos(self.shipDir)
-				self.velY = MOVE_SPEED * dt * math.sin(self.direction) + self.shipVel*dt*math.sin(self.shipDir)
+				self.velX = MOVE_SPEED * dt * math.cos(self.direction) + self.shipVel*math.cos(self.shipDir)
+				self.velY = MOVE_SPEED * dt * math.sin(self.direction) + self.shipVel*math.sin(self.shipDir)
 				self.animation:set_animation(true)
 				self.animation:update(dt)
 				
