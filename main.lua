@@ -71,7 +71,7 @@ function love.draw()
 		-objects.ship.y
 	)
 
-	objects.background:draw()
+	objects.background:draw({x = objects.ship.x, y = objects.ship.y})
 	love.graphics.pop()
 
 	love.graphics.push()
