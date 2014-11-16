@@ -18,8 +18,9 @@ local AsteroidFields = require "asteroidFields"
 
 function love.load()
 	local layout = require "content.shipLayout"
+	local level = require "levels.level1"
 
-	objects.ship = Ship(layout)
+	objects.ship = Ship(layout, level)
 	objects.navigation = Navigation(layout)
 	objects.background = Background()
 	objects.minimap = Minimap()
@@ -33,7 +34,6 @@ function love.load()
 		love.graphics.newImage("images/asteroid_1.png"),
 		love.graphics.newImage("images/asteroid_2.png")
 	}
-	local level = require "levels.level1"
 	objects.asteroidFields = AsteroidFields(level.layers[2], asteroidSprites)
 end
 
@@ -96,6 +96,7 @@ function love.update(dt)
 	for i, nav in ipairs(objects.navigation) do
 		nav:update(dt)
 	end
+
 	objects.ship:update(dt)
 	objects.background:update(dt)
 	objects.minimap:update(dt)

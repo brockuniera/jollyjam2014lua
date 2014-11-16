@@ -1,6 +1,3 @@
-SHIP_X = 428
-SHIP_Y = 115
-
 local SHAKE_THRESHOLD = 100
 local ACCEL = 10
 local MAX_TURN_SPEED = math.pi * .1
@@ -10,7 +7,7 @@ local TURN_MULT = 2
 local DECEL_MULT = 2
 local TURN_DRAG = .995 * 60
 
-function Ship(layout)
+function Ship(layout, level)
 	local ship = {
 		angle = 0,
 		x = 0,
@@ -57,6 +54,14 @@ function Ship(layout)
 
 				table.insert(ship.walls, wall)
 			end
+		end
+	end
+
+	-- Places ship in world based on level file
+	for i, layer in ipairs(level.layers) do
+		if layer.name == "Spawn" and layer.objects then
+			ship.x = layer.objects[1].x
+			ship.y = layer.objects[1].y
 		end
 	end
 
