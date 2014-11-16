@@ -7,6 +7,24 @@ function Button(type, x, y, width, height)
 		height = height
 	}
 
+	if button.type == "left" then
+		button.sprite = love.graphics.newImage("images/Left.png")
+		button.spritePressed = love.graphics.newImage("images/Left_Pressed.png")
+		button.spriteBroken = love.graphics.newImage("images/Left_Broken.png")
+	elseif button.type == "right" then
+		button.sprite = love.graphics.newImage("images/Right.png")
+		button.spritePressed = love.graphics.newImage("images/Right_Pressed.png")
+		button.spriteBroken = love.graphics.newImage("images/Right_Broken.png")
+	elseif button.type == "forward" then
+		button.sprite = love.graphics.newImage("images/Forward.png")
+		button.spritePressed = love.graphics.newImage("images/Forward_Pressed.png")
+		button.spriteBroken = love.graphics.newImage("images/Forward_Broken.png")
+	elseif button.type == "back" then
+		button.sprite = love.graphics.newImage("images/Backward.png")
+		button.spritePressed = love.graphics.newImage("images/Backward_Pressed.png")
+		button.spriteBroken = love.graphics.newImage("images/Backward_Broken.png")
+	end
+
 	button.collider = shapes.newPolygonShape(
 		button.x, button.y,
 		button.x + button.width, button.y,
@@ -31,12 +49,14 @@ function Button(type, x, y, width, height)
 	end
 
 	function button:draw()
+		love.graphics.setColor(255,255,255)
+		local sprite
 		if self.pressed then
-			love.graphics.setColor(0, 155, 0)
+			sprite = self.spritePressed
 		else
-			love.graphics.setColor(0, 255, 0)
+			sprite = self.sprite
 		end
-		self.collider:draw("fill")
+		love.graphics.draw(sprite, self.x, self.y)
 	end
 
 	return button

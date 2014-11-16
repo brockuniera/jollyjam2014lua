@@ -1,6 +1,7 @@
 require "animated_sprite"
 local MOVE_SPEED = 200
 local DEADZONE = .2
+local MARGIN = 3
 
 function Player(input, scaling)
 
@@ -34,10 +35,10 @@ function Player(input, scaling)
 
 	-- Collider
 	player.collider = shapes.newPolygonShape(
-		player.x, player.y,
-		player.x + player.width, player.y,
-		player.x + player.width, player.y + player.height,
-		player.x, player.y + player.height
+		player.x + MARGIN, player.y + MARGIN,
+		player.x + player.width - MARGIN, player.y + MARGIN,
+		player.x + player.width - MARGIN, player.y + player.height - MARGIN,
+		player.x + MARGIN, player.y + player.height - MARGIN
 	)
 
 	-- Get ref to ship
@@ -113,6 +114,14 @@ function Player(input, scaling)
 			end
 		end
 
+		-- If we collide with a wall cancel movement
+		for i, shipWall in ipairs(ship.walls) do
+			if self.collider:collidesWith(shipWall) then
+				collision = false
+				break
+			end
+		end
+
 		if not collision then
 			-- Reset position
 			self.x = self.x - velX
@@ -128,6 +137,14 @@ function Player(input, scaling)
 			if self.collider:collidesWith(shipCollider) then
 				-- There was a collision
 				collision = true
+				break
+			end
+		end
+
+		-- If we collide with a wall cancel movement
+		for i, shipWall in ipairs(ship.walls) do
+			if self.collider:collidesWith(shipWall) then
+				collision = false
 				break
 			end
 		end

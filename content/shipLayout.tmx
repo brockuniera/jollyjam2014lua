@@ -1,36 +1,104 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="64" height="36" tilewidth="20" tileheight="20">
- <imagelayer name="ship" x="428" y="115">
+ <imagelayer name="ship">
   <image source="../images/Body_Small.png"/>
  </imagelayer>
  <objectgroup name="ground">
-  <object x="592" y="239.333">
+  <object x="164" y="124">
    <polygon points="0,0 17.3333,-107.333 43.3333,-116 81.3333,-114 136.667,-100 160.667,-90.6667 174.545,0.727273"/>
   </object>
-  <object x="768" y="240.667">
+  <object x="340" y="125.334">
    <polygon points="36.4167,7.14583 90.6667,-52 124.667,-17.3333 152,18 166.667,54.6667 164.667,90.6667 149.333,117.333 119.333,156 97.3333,182.667 38,112"/>
   </object>
-  <object x="766.667" y="362">
+  <object x="338.667" y="246.667">
    <polygon points="0,0 -15.3333,101.333 -85.3333,121.333 -126,126 -157.333,124 -175.333,11.3333"/>
   </object>
-  <object x="551.333" y="247.333">
+  <object x="123.333" y="132">
    <polygon points="0,0 -62,-66.6667 -78.6667,-56.6667 -96,-26 -109.333,13.3333 -116,64.6667 -109.333,118 -87.3333,164 -61.3333,186.667 0,116"/>
   </object>
-  <object x="551.333" y="247.333">
+  <object x="123.333" y="132">
    <polygon points="0,0 41.3333,-10 215.485,-7.21212 253.271,0.354167 254.667,106.667 216,116 40,126.667 0,118.667"/>
   </object>
  </objectgroup>
  <objectgroup name="spawns">
-  <object x="675.109" y="222.846"/>
-  <object x="833.71" y="347.135"/>
-  <object x="682.41" y="379.243"/>
-  <object x="532.801" y="303.326"/>
+  <object x="265.109" y="182.846"/>
+  <object x="314.377" y="187.802"/>
+  <object x="241.077" y="227.243"/>
+  <object x="198.134" y="182.659"/>
  </objectgroup>
  <objectgroup color="#2aa400" name="navigation">
-  <object type="left" x="856" y="241" width="42" height="40"/>
-  <object type="back" x="808" y="287" width="42" height="40"/>
-  <object type="right" x="856" y="332" width="42" height="40"/>
-  <object type="forward" x="856" y="287" width="42" height="40"/>
+  <object type="left" x="402" y="125" width="40" height="40"/>
+  <object type="back" x="357" y="170" width="40" height="40"/>
+  <object type="right" x="402" y="215" width="40" height="40"/>
+  <object type="forward" x="446" y="170" width="40" height="40"/>
  </objectgroup>
  <objectgroup name="weapons"/>
+ <objectgroup color="#a40e00" name="walls">
+  <object x="327" y="36">
+   <polygon points="0,0 14,91 51,96 107,36 -4,-4"/>
+  </object>
+  <object x="379" y="243">
+   <polygon points="0,0 57,67 -56,109 -40,6 0,-3"/>
+  </object>
+  <object x="164" y="260">
+   <polygon points="0,0 16,110 -102,60 -41,-10"/>
+  </object>
+  <object x="181.5" y="15">
+   <polygon points="0,0 -20,109 -58,117 -121,48.5 -83,25 -26,3 1,-1.5"/>
+  </object>
+  <object x="182.5" y="14">
+   <polygon points="0,0 25.5,-5.5 25,-13.5 -5.5,-8"/>
+  </object>
+  <object x="208.5" y="9.5">
+   <polygon points="0,0 41,2 41,-6 -0.5,-8.5"/>
+  </object>
+  <object x="250.5" y="13.5">
+   <polygon points="0,0 74.5,21.5 78,11.5 -0.5,-10.5"/>
+  </object>
+  <object x="432" y="76">
+   <polygon points="0,0 63.5,70.5 73.5,38.5 3.5,-12"/>
+  </object>
+  <object x="494.5" y="147">
+   <polygon points="0,0 13,36.5 45.5,18 10.5,-30"/>
+  </object>
+  <object x="508" y="184">
+   <polygon points="0,0 -5,47 36,46 32.5,-17.5"/>
+  </object>
+  <object x="505" y="219">
+   <polygon points="0,0 -30,45 -0.5,82 36.5,14.5"/>
+  </object>
+  <object x="475.5" y="265.5">
+   <polygon points="0,0 -39,44 -21.5,65.5 27,35.5"/>
+  </object>
+  <object x="323.5" y="351.5">
+   <polygon points="0,0 -82.5,18.5 -68.5,51.5 14.5,21.5"/>
+  </object>
+  <object x="241.5" y="370.5">
+   <polygon points="0,0 -27.5,2.5 -27,41.5 14,33.5"/>
+  </object>
+  <object x="215" y="375">
+   <polygon points="0,0 -35.5,-5.5 -40.5,33.5 1,37"/>
+  </object>
+  <object x="63" y="320.5">
+   <polygon points="0,0 -27.5,-24 -44,-1 -8.5,13.5"/>
+  </object>
+  <object x="36.5" y="297">
+   <polygon points="0,0 -25,-49.5 -30,-26.5 -14.5,12.5"/>
+  </object>
+  <object x="13.5" y="251">
+   <polygon points="0,0 -6.5,-56.5 -11,-31 -11,3"/>
+  </object>
+  <object x="8.5" y="197">
+   <polygon points="0,0 6.5,-49.5 -4,-61 -5.5,-0.5"/>
+  </object>
+  <object x="13.5" y="147.5">
+   <polygon points="0,0 13,-41.5 -7,-62.5 -10,-16"/>
+  </object>
+  <object x="27" y="108.5">
+   <polygon points="0,0 18,-33 -1,-47 -19.5,-23"/>
+  </object>
+  <object x="45.5" y="77.5">
+   <polygon points="0,0 18.5,-13 8,-27.5 -21.5,-19"/>
+  </object>
+ </objectgroup>
 </map>

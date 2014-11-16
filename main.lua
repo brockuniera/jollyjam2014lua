@@ -10,7 +10,7 @@ local GunControl = require "gunControl"
 local Ship = require "ship"
 local Navigation = require "navigation"
 local Background = require "background"
-
+local Minimap = require "minimap"
 
 function love.load()
 	local layout = require "content.shipLayout"
@@ -18,6 +18,7 @@ function love.load()
 	objects.ship = Ship(layout)
 	objects.navigation = Navigation(layout)
 	objects.background = Background()
+	objects.minimap = Minimap()
 	objects.players = {}
 	objects.projectiles = {}
 	objects.weapons = {}
@@ -42,8 +43,6 @@ function love.keypressed(key)
 		objects.weapons[#objects.weapons].y =objects.gunControls[#objects.gunControls].y
 
 	end
-
-
 end
 
 function love.joystickpressed(joystick, button)
@@ -80,10 +79,26 @@ function love.update(dt)
 		nav:update(dt)
 	end
 	objects.ship:update(dt)
+	objects.minimap:update(dt)
 end
 
 function love.draw()
-	objects.background:draw()
+	love.graphics.push()
+	love.graphics.rotate(-objects.ship.angle)
+	love.graphics.translate(
+		-objects.ship.x,
+		-objects.ship.y
+	)
+
+	objects.background:draw({x = objects.ship.x, y = objects.ship.y})
+	love.graphics.pop()
+
+	love.graphics.push()
+	love.graphics.translate(
+		love.graphics.getWidth()/2 - 550/2,
+		love.graphics.getHeight()/2 - 381/2
+	)
+
 	for i, gun in ipairs(objects.weapons) do
 		gun:draw()
 	end
@@ -97,7 +112,7 @@ function love.draw()
 	for i, player in ipairs(objects.players) do
 		player:draw()
 	end
+	love.graphics.pop()
 
+	objects.minimap:draw()
 end
-
-
