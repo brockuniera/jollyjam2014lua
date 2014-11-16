@@ -1,14 +1,13 @@
 require "animated_sprite"
-local MOVE_SPEED = 400
-local INITIAL_LIFE = 200
+local MOVE_SPEED = 800
+local INITIAL_LIFE = 400
 local DEADZONE = .2
 
-function Projectile(x,y, lateralOffset, radius, direction, scaling, shipVelocity, shipDirection)
-
+function Projectile(x, y, lateralOffset, radius, direction, scaling, shipVelocity, shipDirection)
 	local animation = AnimatedSprite:create("images/Fireball_Purple.png", 200, 100,1, 1)
 	local projectile = {
-		x = x,
-		y = y,
+		x = 0,
+		y = 0,
 		vel = vel,
 		life = INITIAL_LIFE,
                 lateralOffset = lateralOffset,
@@ -26,8 +25,12 @@ function Projectile(x,y, lateralOffset, radius, direction, scaling, shipVelocity
 
 	}
 
-	projectile.x = x + math.cos(direction)*radius + math.sin(direction)*projectile.lateralOffset
-	projectile.y = y + math.sin(direction)*radius - math.cos(direction)*projectile.lateralOffset
+	local tempX = x + math.cos(direction)*radius + math.sin(direction)*projectile.lateralOffset
+	local tempY = y + math.sin(direction)*radius - math.cos(direction)*projectile.lateralOffset
+
+	local translated = objects.ship:translateCoords(tempX, tempY)
+	projectile.x = translated.x
+	projectile.y = translated.y
 
 	--Load sprite lists for animation
 	projectile.animation:load()
@@ -58,6 +61,15 @@ function Projectile(x,y, lateralOffset, radius, direction, scaling, shipVelocity
 				self.collider:moveTo(self.x, self.y)
 				self.life = self.life - dt*100
 				--print(self.life)
+
+				for i, enemy in ipairs(objects.enemies) do
+					if self.collider:collidesWith(enemy.collider) then
+						-- Destroy enemy
+						table.remove(objects.enemies, i)
+						self.life = 0
+						break
+					end
+				end
 	end
 
 	function projectile:draw()

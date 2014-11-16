@@ -48,7 +48,6 @@ blur:send("CanvasSize", {love.graphics.getDimensions()})
 
 scale = .5
 
-local AsteroidFields = require "asteroidFields"
 
 function love.load()
 	local layout = require "content.shipLayout"
@@ -139,7 +138,8 @@ end
 function love.update(dt)
 	for i, player in ipairs(objects.players) do
 		player:update(dt)
-	end
+		
+		end
 	for i, gunControl in ipairs(objects.gunControls) do
 		gunControl:update(dt)
 		if gunControl.canFire then
@@ -213,6 +213,7 @@ function love.draw()
 		gun:draw()
 	end
 	for i, thr in ipairs(objects.thrusters) do
+		--assert(i<2)
 		thr:draw()
 	end
 	objects.ship:draw()
@@ -225,9 +226,7 @@ function love.draw()
 	for i, player in ipairs(objects.players) do
 		player:draw()		
 	end
-			
-	love.graphics.setShader()
-	love.graphics.pop()
+		love.graphics.pop()
 
 		objects.ship.hullStrength =100
 		objects.ship.shieldStrength =35
@@ -245,7 +244,14 @@ function love.draw()
 		love.graphics.draw(healthBarGraphic, HEALTH_OVERLAY_X, HEALTH_OVERLAY_Y)
 		love.graphics.draw(healthBarGraphic, SHIELD_OVERLAY_X, SHIELD_OVERLAY_Y)
 			
+<<<<<<< HEAD
 	--love.graphics.setShader()
+=======
+	love.graphics.setShader()
+	love.graphics.pop()
+
+
+>>>>>>> d5c8722f1b6e965952b9173d2d0ecccc87d8ea8f
 	objects.minimap:draw()
 
 

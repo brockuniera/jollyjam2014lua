@@ -13,6 +13,7 @@ function Enemy(x, y)
 		sprite = lume.randomchoice(enemySprites),
 		angle = 0
 	}
+	enemy.collider = shapes.newCircleShape(x, y, 100)
 
 	function enemy:update(dt)
 		coords = objects.ship:getCoords()
@@ -23,7 +24,7 @@ function Enemy(x, y)
 	end
 
 	function enemy:draw()
-		love.graphics.setColor(255,255,255)
+		love.graphics.setColor(255,255,255,255)
 		love.graphics.draw(self.sprite, self.x, self.y, self.angle, 1, 1,
 			self.sprite:getWidth()/2, self.sprite:getHeight()/2)
 	end

@@ -11,6 +11,51 @@ return {
   layers = {
     {
       type = "objectgroup",
+      name = "Enemies",
+      visible = true,
+      opacity = 1,
+      properties = {},
+      objects = {
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 1270.15,
+          y = 351.734,
+          width = 2183.68,
+          height = 1265.27,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 2081.09,
+          y = 830.484,
+          width = 1309.23,
+          height = 649.731,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 2032.24,
+          y = 713.239,
+          width = 1123.6,
+          height = 600.879,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        }
+      }
+    },
+    {
+      type = "objectgroup",
       name = "Goal",
       visible = true,
       opacity = 1,
@@ -38,13 +83,37 @@ return {
       properties = {},
       objects = {
         {
-          name = "Asteroid Belt",
+          name = "",
           type = "",
           shape = "rectangle",
-          x = 0,
-          y = 0,
-          width = 10000,
-          height = 590.07,
+          x = 3111.48,
+          y = 1331.11,
+          width = 0,
+          height = 0,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 2212.98,
+          y = 831.942,
+          width = 1264.56,
+          height = 915.141,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 1098.17,
+          y = 99.8318,
+          width = 2312.81,
+          height = 1580.7,
           rotation = 0,
           visible = true,
           properties = {}
@@ -59,13 +128,13 @@ return {
       properties = {},
       objects = {
         {
-          name = "Spawn",
+          name = "",
           type = "",
           shape = "rectangle",
-          x = 604.462,
-          y = 500.284,
-          width = 88.7503,
-          height = 91.149,
+          x = 2462.56,
+          y = 1131.45,
+          width = 0,
+          height = 0,
           rotation = 0,
           visible = true,
           properties = {}

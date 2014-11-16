@@ -3,8 +3,8 @@ local Y = 5
 local MARGIN = 10
 local WIDTH = 200
 local HEIGHT = 200
-local WORLD_WIDTH = 4000
-local WORLD_HEIGHT = 4000
+local WORLD_WIDTH = 200
+local WORLD_HEIGHT = 200
 
 function Minimap()
 	minimap = {}
@@ -49,6 +49,18 @@ function Minimap()
 			local enemyY = MARGIN + Y + enemy.y / WORLD_HEIGHT
 
 			love.graphics.circle("fill", enemyX, enemyY, 4)
+		end
+
+		-- Asteroids
+
+		love.graphics.setColor(150, 60, 10)
+		for i, val in pairs(objects.asteroidFields:get()) do
+			for j, asteroid in pairs(val) do
+				local asteroidX = MARGIN + X + asteroid.x / WORLD_WIDTH
+				local asteroidY = MARGIN + Y + asteroid.y / WORLD_HEIGHT
+
+				love.graphics.circle("fill", asteroidX, asteroidY, 2)
+			end
 		end
 		
 		love.graphics.setColor(255, 255, 255)

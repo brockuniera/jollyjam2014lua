@@ -51,8 +51,8 @@ return {
           name = "",
           type = "right",
           shape = "rectangle",
-          x = -355,
-          y = 303,
+          x = -350,
+          y = -140,
           width = 601,
           height = 225,
           rotation = 0,
@@ -192,8 +192,8 @@ return {
           name = "",
           type = "",
           shape = "rectangle",
-          x = 265.109,
-          y = 182.846,
+          x = 249.109,
+          y = 32.846,
           width = 0,
           height = 0,
           rotation = 0,
@@ -209,15 +209,15 @@ return {
           width = 0,
           height = 0,
           rotation = 0,
-          visible = true,
+          visible = false,
           properties = {}
         },
         {
           name = "",
           type = "",
           shape = "rectangle",
-          x = 241.077,
-          y = 227.243,
+          x = 247.077,
+          y = 347.243,
           width = 0,
           height = 0,
           rotation = 0,
@@ -228,12 +228,12 @@ return {
           name = "",
           type = "",
           shape = "rectangle",
-          x = 198.134,
-          y = 182.659,
+          x = 195.134,
+          y = 190.659,
           width = 0,
           height = 0,
           rotation = 0,
-          visible = true,
+          visible = false,
           properties = {}
         }
       }
@@ -711,6 +711,16 @@ return {
           properties = {}
         }
       }
+    },
+    {
+      type = "imagelayer",
+      name = "shield",
+      x = -521,
+      y = -436,
+      visible = true,
+      opacity = 1,
+      image = "../images/Shield.png",
+      properties = {}
     }
   }
 }

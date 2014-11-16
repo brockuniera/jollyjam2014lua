@@ -68,7 +68,7 @@ function Ship(layout, level)
 
 	-- Places ship in world based on level file
 	for i, layer in ipairs(level.layers) do
-		if layer.name == "Spawn" and layer.objects then
+		if layer.name == "Spawn" and layer.objects[1] then
 			ship.x = layer.objects[1].x
 			ship.y = layer.objects[1].y
 		end
@@ -153,6 +153,15 @@ function Ship(layout, level)
 		return point
 	end
 
+	function ship:translateCoords(x, y)
+		point = {
+			x = love.graphics.getWidth()/(scale*2) + x + self.x - ship.image:getWidth()/2,
+			y = love.graphics.getHeight()/(scale*2) + y + self.y - ship.image:getHeight()/2,
+		}
+		rotatePoint(point, self, self.angle)
+		return point
+	end
+
 	function ship:draw()
 		love.graphics.setColor(255,255,255)
 		love.graphics.draw(self.image)
@@ -163,12 +172,11 @@ function Ship(layout, level)
 		if self.shieldStrength > 0 then
 			love.graphics.setColor(self.shieldStrength,self.shieldStrength,self.shieldStrength)
 			--love.graphics.draw(self.shieldImage, 200- self.shieldImage:getWidth()/2.0, 200- self.shieldImage:getHeight()/2.0)
-	for i, layer in ipairs(layout.layers) do
-		if layer.name=="shield" then
-			assert(false)
+	--[[for i, layer in ipairs(layout.layers) do
+		if layer.name=="shield" then			
 			love.graphics.draw(self.shieldImage, layer.objects[1].x, layer.objects[1].y)
 		end
-	end
+	end--]]
 						
 		end
 	end
