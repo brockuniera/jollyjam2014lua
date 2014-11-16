@@ -26,7 +26,6 @@ function AsteroidFields(level, sprites)
 							['x'] = x + obj.x,
 							['y'] = y + obj.y + lume.random(0, RANGE)
 						}
-						print(position.x)
 						table.insert(asteroidFields.fields[i],
 						Asteroid(position, lume.randomchoice(sprites)))
 					end

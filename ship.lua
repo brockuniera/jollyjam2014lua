@@ -2,18 +2,24 @@ local SHAKE_THRESHOLD = 100
 local ACCEL = 10
 local MAX_TURN_SPEED = math.pi * .1
 local TURN_ACCEL = math.pi * .0004
-local MAX_SPEED = 50
+local MAX_SPEED = 20
 local TURN_MULT = 2
 local DECEL_MULT = 2
 local TURN_DRAG = .995 * 60
+local MAX_HULL_STRENGTH = 255
+local MAX_SHIELD_STRENGTH = 255
 
 function Ship(layout, level)
 	local ship = {
+		layout = layout,
 		angle = 0,
 		x = 0,
 		y = 0,
 		velocity = 0,
-		angleVel = 0
+		angleVel = 0,
+		hullStrength = MAX_HULL_STRENGTH,
+		shieldStrength = MAX_SHIELD_STRENGTH
+		
 	}
 
 	ship.colliders = {}
@@ -25,6 +31,7 @@ function Ship(layout, level)
 		forward = false
 	}
 	ship.image = love.graphics.newImage("images/Body_Small.png")
+	ship.shieldImage = love.graphics.newImage("images/Shield_small.png")
 
 	for i, layer in ipairs(layout.layers) do
 		if layer.name == "ground" then
@@ -128,6 +135,22 @@ function Ship(layout, level)
 		end
 	end
 
+	function rotatePoint(point, origin, degrees)
+	    local x = origin.x + ( math.cos(degrees) * (point.x - origin.x) - math.sin(degrees) * (point.y - origin.y) )
+	    local y = origin.y + ( math.sin(degrees) * (point.x - origin.x) + math.cos(degrees) * (point.y - origin.y) )
+	    point.x = x
+	    point.y = y
+	end
+
+	function ship:getCoords()
+		point = {
+			x = love.graphics.getWidth()/(scale*2) + self.x,
+			y = love.graphics.getHeight()/(scale*2) + self.y,
+		}
+		rotatePoint(point, self, self.angle)
+		return point
+	end
+
 	function ship:draw()
 		love.graphics.setColor(255,255,255)
 		love.graphics.draw(self.image)
@@ -135,6 +158,16 @@ function Ship(layout, level)
 			love.graphics.setColor(150, 150, 150)
 			collider:draw("fill")
 		end]]--
+		if self.shieldStrength > 0 then
+			love.graphics.setColor(self.shieldStrength,self.shieldStrength,self.shieldStrength)
+			--love.graphics.draw(self.shieldImage, 200- self.shieldImage:getWidth()/2.0, 200- self.shieldImage:getHeight()/2.0)
+	--[[for i, layer in ipairs(layout.layers) do
+		if layer.name=="shield" then			
+			love.graphics.draw(self.shieldImage, layer.objects[1].x, layer.objects[1].y)
+		end
+	end--]]
+						
+		end
 	end
 
 	return ship

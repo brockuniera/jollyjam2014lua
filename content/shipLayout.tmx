@@ -3,6 +3,12 @@
  <imagelayer name="ship">
   <image source="../images/Body_Small.png"/>
  </imagelayer>
+ <objectgroup name="thruster">
+  <object type="left" x="-349.5" y="-139.5" width="601" height="225"/>
+ </objectgroup>
+ <objectgroup name="thruster">
+  <object type="right" x="-350" y="-140" width="601" height="225"/>
+ </objectgroup>
  <objectgroup name="ground">
   <object x="164" y="124">
    <polygon points="0,0 17.3333,-107.333 43.3333,-116 81.3333,-114 136.667,-100 160.667,-90.6667 174.545,0.727273"/>
@@ -21,10 +27,10 @@
   </object>
  </objectgroup>
  <objectgroup name="spawns">
-  <object x="265.109" y="182.846"/>
-  <object x="314.377" y="187.802"/>
-  <object x="241.077" y="227.243"/>
-  <object x="198.134" y="182.659"/>
+  <object x="249.109" y="32.846"/>
+  <object x="314.377" y="187.802" visible="0"/>
+  <object x="247.077" y="347.243"/>
+  <object x="195.134" y="190.659" visible="0"/>
  </objectgroup>
  <objectgroup color="#2aa400" name="navigation">
   <object type="left" x="402" y="125" width="40" height="40"/>
@@ -35,10 +41,10 @@
  <objectgroup name="weapons"/>
  <objectgroup color="#a40e00" name="walls">
   <object x="327" y="36">
-   <polygon points="0,0 14,91 51,96 107,36 -4,-4"/>
+   <polygon points="0,0 12,88.25 49.5909,95.8636 107,36 -4,-4"/>
   </object>
   <object x="379" y="243">
-   <polygon points="0,0 57,67 -56,109 -40,6 0,-3"/>
+   <polygon points="-0.602273,-3.82955 57,67 -56,109 -40,6"/>
   </object>
   <object x="164" y="260">
    <polygon points="0,0 16,110 -102,60 -41,-10"/>
@@ -101,4 +107,7 @@
    <polygon points="0,0 18.5,-13 8,-27.5 -21.5,-19"/>
   </object>
  </objectgroup>
+ <imagelayer name="shield" x="-521" y="-436">
+  <image source="../images/Shield.png"/>
+ </imagelayer>
 </map>

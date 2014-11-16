@@ -14,14 +14,14 @@ function Minimap()
 	end
 
 	function minimap:draw()
+		love.graphics.setScissor(X, Y, WIDTH, HEIGHT)
 		love.graphics.setColor(0, 0, 0)
 		love.graphics.rectangle("fill", X, Y, WIDTH, HEIGHT)
 
+		-- Player ship
 		local shipX = MARGIN + X + objects.ship.x / WORLD_WIDTH
 		local shipY = MARGIN + Y + objects.ship.y / WORLD_HEIGHT
 		love.graphics.setColor(0, 255, 0)
-
-
 
 		local verts = {
 			-5, -5,
@@ -42,9 +42,18 @@ function Minimap()
 
 		love.graphics.polygon("fill", verts)
 
+		-- Enemies
+		love.graphics.setColor(255, 0, 0)
+		for i, enemy in ipairs(objects.enemies) do
+			local enemyX = MARGIN + X + enemy.x / WORLD_WIDTH
+			local enemyY = MARGIN + Y + enemy.y / WORLD_HEIGHT
+
+			love.graphics.circle("fill", enemyX, enemyY, 4)
+		end
 		
 		love.graphics.setColor(255, 255, 255)
 		love.graphics.rectangle("line", X, Y, WIDTH, HEIGHT)
+		love.graphics.setScissor()
 	end
 
 	return minimap

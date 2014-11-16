@@ -1,6 +1,6 @@
 local PARRALAX = .9
 local BLUR_FACTOR = .1
-local MAX_BLUR = 50
+local MAX_BLUR = 20
 
 function Background()
 	--constructor
@@ -24,8 +24,8 @@ function Background()
 	function background:draw(shipPosition)
 		love.graphics.setShader(background.blur)
 		love.graphics.setColor(255, 255, 255 )
-		local width = love.graphics.getWidth()
-		local height = love.graphics.getHeight()
+		local width = love.graphics.getWidth()/scale
+		local height = love.graphics.getHeight()/scale
 
 		for i = -2, width / self.image:getWidth() + 1 do
 			for j = -2, height / self.image:getHeight() + 1 do

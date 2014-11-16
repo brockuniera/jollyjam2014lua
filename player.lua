@@ -29,7 +29,7 @@ function Player(input, scaling)
 	player.animation:load()
 
 	player.input = input
-	if input ~= "keyboard" then
+	if (input ~= "keyboard" and input ~= "keyboard2") then
 		_, player.aIndex = player.input:getGamepadMapping("a")
 	end
 
@@ -55,6 +55,7 @@ function Player(input, scaling)
 	function player:update(dt)
 		local velX = 0
 		local velY = 0
+		
 
 		if self.input == "keyboard" then
 			-- Keyboard input
@@ -75,7 +76,7 @@ function Player(input, scaling)
 			else
 				self.isUsing = false
 			end
-		else
+		elseif self.input ~= "keyboard2" then
 			-- Controller input
 			velX = self.input:getGamepadAxis("leftx")
 			velY = self.input:getGamepadAxis("lefty")
@@ -88,7 +89,27 @@ function Player(input, scaling)
 			if math.abs(velY) < DEADZONE then
 				velY = 0
 			end
+		else
+			-- Keyboard input
+			if love.keyboard.isDown("right") then
+				velX = MOVE_SPEED * dt
+			elseif love.keyboard.isDown("left") then
+				velX = -MOVE_SPEED * dt
+			end
+
+			if love.keyboard.isDown("up") then
+				velY = -MOVE_SPEED * dt
+			elseif love.keyboard.isDown("down") then
+				velY = MOVE_SPEED * dt
+			end
+
+			if love.keyboard.isDown("p")then
+				self.isUsing = true
+			else
+				self.isUsing = false
+			end
 		end
+		
 
 			if(velX == 0.0 and velY == 0.0) then
 				--Stop moving
@@ -157,7 +178,7 @@ function Player(input, scaling)
 	end
 
 	function player:draw()
-		love.graphics.setColor(145, 145, 145)
+		love.graphics.setColor(255, 255, 255)
 		--self.collider:draw("fill")
 		self.animation:draw(self.x, self.y, self.direction, self.scaling)
 	end

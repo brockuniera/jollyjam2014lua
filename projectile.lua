@@ -3,19 +3,21 @@ local MOVE_SPEED = 400
 local INITIAL_LIFE = 200
 local DEADZONE = .2
 
-function Projectile(x,y, direction, scaling, shipVelocity, shipDirection)
+function Projectile(x,y, lateralOffset, radius, direction, scaling, shipVelocity, shipDirection)
 
-	local animation = AnimatedSprite:create("images/fireball.png", 258, 258, 1, 1)
+	local animation = AnimatedSprite:create("images/Fireball_Purple.png", 200, 100,1, 1)
 	local projectile = {
 		x = x,
 		y = y,
 		vel = vel,
 		life = INITIAL_LIFE,
+                lateralOffset = lateralOffset,
 		direction = direction,
 	animation = animation,
 	width =  animation.width,
 	height = animation.height,
 	direction = direction,
+	radius = radius,
 	isUsing = false,
 	scaling = scaling,
 	shipVel = shipVelocity,
@@ -23,6 +25,9 @@ function Projectile(x,y, direction, scaling, shipVelocity, shipDirection)
 	aIndex
 
 	}
+
+	projectile.x = x + math.cos(direction)*radius + math.sin(direction)*projectile.lateralOffset
+	projectile.y = y + math.sin(direction)*radius - math.cos(direction)*projectile.lateralOffset
 
 	--Load sprite lists for animation
 	projectile.animation:load()

@@ -12,10 +12,54 @@ return {
     {
       type = "imagelayer",
       name = "ship",
+      x = 0,
+      y = 0,
       visible = true,
       opacity = 1,
       image = "../images/Body_Small.png",
       properties = {}
+    },
+    {
+      type = "objectgroup",
+      name = "thruster",
+      visible = true,
+      opacity = 1,
+      properties = {},
+      objects = {
+        {
+          name = "",
+          type = "left",
+          shape = "rectangle",
+          x = -349.5,
+          y = -139.5,
+          width = 601,
+          height = 225,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        }
+      }
+    },
+    {
+      type = "objectgroup",
+      name = "thruster",
+      visible = true,
+      opacity = 1,
+      properties = {},
+      objects = {
+        {
+          name = "",
+          type = "right",
+          shape = "rectangle",
+          x = -350,
+          y = -140,
+          width = 601,
+          height = 225,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        }
+      }
     },
     {
       type = "objectgroup",
@@ -148,8 +192,8 @@ return {
           name = "",
           type = "",
           shape = "rectangle",
-          x = 265.109,
-          y = 182.846,
+          x = 249.109,
+          y = 32.846,
           width = 0,
           height = 0,
           rotation = 0,
@@ -165,15 +209,15 @@ return {
           width = 0,
           height = 0,
           rotation = 0,
-          visible = true,
+          visible = false,
           properties = {}
         },
         {
           name = "",
           type = "",
           shape = "rectangle",
-          x = 241.077,
-          y = 227.243,
+          x = 247.077,
+          y = 347.243,
           width = 0,
           height = 0,
           rotation = 0,
@@ -184,12 +228,12 @@ return {
           name = "",
           type = "",
           shape = "rectangle",
-          x = 198.134,
-          y = 182.659,
+          x = 195.134,
+          y = 190.659,
           width = 0,
           height = 0,
           rotation = 0,
-          visible = true,
+          visible = false,
           properties = {}
         }
       }
@@ -278,8 +322,8 @@ return {
           visible = true,
           polygon = {
             { x = 0, y = 0 },
-            { x = 14, y = 91 },
-            { x = 51, y = 96 },
+            { x = 12, y = 88.25 },
+            { x = 49.5909, y = 95.8636 },
             { x = 107, y = 36 },
             { x = -4, y = -4 }
           },
@@ -296,11 +340,10 @@ return {
           rotation = 0,
           visible = true,
           polygon = {
-            { x = 0, y = 0 },
+            { x = -0.602273, y = -3.82955 },
             { x = 57, y = 67 },
             { x = -56, y = 109 },
-            { x = -40, y = 6 },
-            { x = 0, y = -3 }
+            { x = -40, y = 6 }
           },
           properties = {}
         },
@@ -668,6 +711,16 @@ return {
           properties = {}
         }
       }
+    },
+    {
+      type = "imagelayer",
+      name = "shield",
+      x = -521,
+      y = -436,
+      visible = true,
+      opacity = 1,
+      image = "../images/Shield.png",
+      properties = {}
     }
   }
 }
