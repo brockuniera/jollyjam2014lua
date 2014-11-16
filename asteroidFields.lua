@@ -3,26 +3,32 @@ local Asteroid = require "asteroid"
 local RANGE = 400 --max spread of asteroids
 local MIN = 100 --min spread of asteroids
 
-function AsteroidFields(asteroidLayer, sprites)
+function AsteroidFields(level, sprites)
 	local asteroidFields = {
 		fields = {} --contains all asteroid fields
 	}
 
-	for i, obj in ipairs(asteroidLayer.objects) do
-		--gets every asteroid field
-		asteroidFields.fields[obj.name] = {}
+	for a, layer in ipairs(level.layers) do
+		if layer.name == "Asteroids" then
 
-		local x = 0
-		local y = 0
+			for i, obj in ipairs(layer.objects) do
+				--gets every asteroid field
+				asteroidFields.fields[obj.name] = {}
 
-		--build asteroids
-		while y < obj.height do
-			while x < obj.width do
-				x = x + MIN + lume.random(0, RANGE)
-				local position = {['x'] = x, ['y'] = y + lume.random(0, RANGE)}
-				table.insert(asteroidFields.fields[obj.name], Asteroid(position, lume.randomchoice(sprites)))
+				local x = 0
+				local y = 0
+
+				--build asteroids
+				while y < obj.height do
+					while x < obj.width do
+						x = x + MIN + lume.random(0, RANGE)
+						local position = {['x'] = x, ['y'] = y + lume.random(0, RANGE)}
+						table.insert(asteroidFields.fields[obj.name], Asteroid(position, lume.randomchoice(sprites)))
+					end
+					y = y + RANGE
+				end
 			end
-			y = y + RANGE
+
 		end
 	end
 

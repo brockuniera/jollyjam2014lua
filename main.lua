@@ -34,7 +34,7 @@ function love.load()
 		love.graphics.newImage("images/asteroid_1.png"),
 		love.graphics.newImage("images/asteroid_2.png")
 	}
-	objects.asteroidFields = AsteroidFields(level.layers[2], asteroidSprites)
+	objects.asteroidFields = AsteroidFields(level, asteroidSprites)
 end
 
 function love.keypressed(key)
