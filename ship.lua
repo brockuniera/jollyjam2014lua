@@ -69,7 +69,6 @@ function Ship(layout, level)
 		if layer.name == "Spawn" and layer.objects then
 			ship.x = layer.objects[1].x
 			ship.y = layer.objects[1].y
-			print(ship.x, ship.y)
 		end
 	end
 

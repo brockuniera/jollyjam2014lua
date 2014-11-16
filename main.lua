@@ -28,8 +28,8 @@ local Minimap = require "minimap"
 local Shake = require "shake"
 local Enemy = require "enemy"
 
---local blur = love.graphics.newShader("lib/blur.frag")
---blur:send("CanvasSize", {love.graphics.getDimensions()})
+local blur = love.graphics.newShader("lib/blur.frag")
+blur:send("CanvasSize", {love.graphics.getDimensions()})
 
 scale = .5
 
@@ -112,7 +112,7 @@ function love.joystickpressed(joystick, button)
 			end
 		end
 		-- No player has this joystick yet
-		table.insert(objects.players, Player(joystick))
+		table.insert(objects.players, Player(joystick, 2))
 	end
 end
 
@@ -153,9 +153,9 @@ function love.update(dt)
 	objects.ship:update(dt)
 	objects.background:update(dt)
 	objects.minimap:update(dt)
-	--blur:send("Blur", {objects.shake.offsetX, objects.shake.offsetY})
+	blur:send("Blur", {objects.shake.offsetX, objects.shake.offsetY})
 	objects.asteroidFields:update(dt)
-	--shake:update(dt)
+	shake:update(dt)
 end
 
 function love.draw()
@@ -178,7 +178,7 @@ function love.draw()
 	for i, projectile in ipairs(objects.projectiles) do
 		projectile:draw()
 	end
-	
+
 	love.graphics.pop()
 
 	love.graphics.push()
