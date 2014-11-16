@@ -78,6 +78,23 @@ function love.keypressed(key)
 		objects.weapons[#objects.weapons].y =objects.gunControls[#objects.gunControls].y
 
 	end
+-- Add player when someone presses p
+--TODO this is an adhoc second player
+	if key == "p" then
+		for i, player in ipairs(objects.players) do
+			if player.input == "keyboard2" then
+				-- There's already a keyboard player
+				return
+			end
+		end
+		-- There is no keyboard2 player yet. Make one.
+		table.insert(objects.players, Player("keyboard2", 2))
+		table.insert(objects.weapons, Gun("keyboard2", 2))
+		table.insert(objects.gunControls, GunControl("keyboard2", 1.00))
+		objects.weapons[#objects.weapons].x =objects.gunControls[#objects.gunControls].x +30
+		objects.weapons[#objects.weapons].y =objects.gunControls[#objects.gunControls].y
+
+	end
 end
 
 function love.joystickpressed(joystick, button)
@@ -180,8 +197,9 @@ function love.draw()
 		nav:draw()
 	end
 	for i, player in ipairs(objects.players) do
-		player:draw()
+		player:draw()		
 	end
+			
 	love.graphics.setShader()
 	love.graphics.pop()
 

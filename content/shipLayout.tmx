@@ -27,10 +27,10 @@
   </object>
  </objectgroup>
  <objectgroup name="spawns">
-  <object x="265.109" y="182.846"/>
-  <object x="314.377" y="187.802"/>
-  <object x="241.077" y="227.243"/>
-  <object x="198.134" y="182.659"/>
+  <object x="249.109" y="32.846"/>
+  <object x="314.377" y="187.802" visible="0"/>
+  <object x="247.077" y="347.243"/>
+  <object x="195.134" y="190.659" visible="0"/>
  </objectgroup>
  <objectgroup color="#2aa400" name="navigation">
   <object type="left" x="402" y="125" width="40" height="40"/>
@@ -107,4 +107,7 @@
    <polygon points="0,0 18.5,-13 8,-27.5 -21.5,-19"/>
   </object>
  </objectgroup>
+ <imagelayer name="shield" x="-521" y="-436">
+  <image source="../images/Shield.png"/>
+ </imagelayer>
 </map>
