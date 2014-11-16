@@ -6,6 +6,7 @@ local MAX_TURN_SPEED = math.pi * .1
 local TURN_ACCEL = math.pi * .0004
 local MAX_SPEED = 50
 local TURN_MULT = 2
+local DECEL_MULT = 2
 
 function Ship(layout)
 	local ship = {
@@ -68,22 +69,34 @@ function Ship(layout)
 
 	function ship:update(dt)
 		-- Navigation controls
+		local accel = ACCEL
+		
 		if self.controls.forward then
-			self.velocity = self.velocity + ACCEL * dt
+			if self.velocity < 0 then
+				accel = accel * TURN_MULT
+			end
+			self.velocity = self.velocity + accel * dt
 		end
 		if self.controls.back then
-			self.velocity = self.velocity - ACCEL * dt
+			if self.velocity > 0 then
+				accel = accel * TURN_MULT
+			end
+			self.velocity = self.velocity - accel * dt
 		end
 
 		local turnAccel = TURN_ACCEL
-		if self.angleVel > 0 then
-			turnAccel = turnAccel * TURN_MULT
-		end
+		
 
 		if self.controls.left then
+			if self.angleVel > 0 then
+				turnAccel = turnAccel * TURN_MULT
+			end
 			self.angleVel = self.angleVel - turnAccel * dt
 		end
 		if self.controls.right then
+			if self.angleVel < 0 then
+				turnAccel = turnAccel * TURN_MULT
+			end
 			self.angleVel = self.angleVel + turnAccel * dt
 		end
 
