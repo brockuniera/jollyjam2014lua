@@ -27,6 +27,7 @@ local Background = require "background"
 local Minimap = require "minimap"
 local Shake = require "shake"
 local Enemy = require "enemy"
+local count = 0
 
 --local blur = love.graphics.newShader("lib/blur.frag")
 --blur:send("CanvasSize", {love.graphics.getDimensions()})
@@ -73,16 +74,15 @@ function love.keypressed(key)
 			end
 		end
 		-- There is no keyboard player yet. Make one.
+		count = count + 1
 		table.insert(objects.players, Player("keyboard", 2))
-		table.insert(objects.weapons, Gun("keyboard", 2))
-		table.insert(objects.gunControls, GunControl("keyboard", 1.00))
+		table.insert(objects.weapons, Gun("keyboard", 2, count))
+		table.insert(objects.gunControls, GunControl("keyboard", 1.00, count))
 		objects.weapons[#objects.weapons].x =objects.gunControls[#objects.gunControls].x +30
 		objects.weapons[#objects.weapons].y =objects.gunControls[#objects.gunControls].y
-
-	end
 -- Add player when someone presses p
 --TODO this is an adhoc second player
-	if key == "p" then
+	elseif key == "p" then
 		for i, player in ipairs(objects.players) do
 			if player.input == "keyboard2" then
 				-- There's already a keyboard player
@@ -90,12 +90,12 @@ function love.keypressed(key)
 			end
 		end
 		-- There is no keyboard2 player yet. Make one.
+		count = count + 1
 		table.insert(objects.players, Player("keyboard2", 2))
-		table.insert(objects.weapons, Gun("keyboard2", 2))
-		table.insert(objects.gunControls, GunControl("keyboard2", 1.00))
+		table.insert(objects.weapons, Gun("keyboard2", 2, count))
+		table.insert(objects.gunControls, GunControl("keyboard2", 1.00, count))
 		objects.weapons[#objects.weapons].x =objects.gunControls[#objects.gunControls].x +30
 		objects.weapons[#objects.weapons].y =objects.gunControls[#objects.gunControls].y
-
 	end
 end
 

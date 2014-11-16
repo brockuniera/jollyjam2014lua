@@ -2,9 +2,12 @@ require "animated_sprite"
 local MOVE_SPEED = 200
 local DEADZONE = .2
 
-function Gun(input, scaling)
+function Gun(input, scaling, player)
 
 	local animation = AnimatedSprite:create("images/gatling_gun_small.png", 89, 256,1, 1)
+	if player == 1 then
+		animation = AnimatedSprite:create("images/gatling_gun_small-right.png", 89, 256,1, 1)
+	end
 	local gun = {
 		x = 0,
 		y = 0,
@@ -78,7 +81,10 @@ function Gun(input, scaling)
 				self.direction = math.atan2(velY, velX) + 3.0*math.pi/2.0
 			end
 			--]]
-			self.direction = direction
+			self.direction = direction 
+			if player == 1 then
+				self.direction = self.direction + math.pi
+			end
 	end
 
 	function gun:draw()
