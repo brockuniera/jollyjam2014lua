@@ -12,6 +12,8 @@ local Navigation = require "navigation"
 local Background = require "background"
 local Minimap = require "minimap"
 
+local AsteroidFields = require "asteroidFields"
+
 function love.load()
 	local layout = require "content.shipLayout"
 
@@ -23,7 +25,13 @@ function love.load()
 	objects.projectiles = {}
 	objects.weapons = {}
 	objects.gunControls = {}
-	--objects.player = Player("keyboard")
+
+	local asteroidSprites = {
+		love.graphics.newImage("images/asteroid_1.png"),
+		love.graphics.newImage("images/asteroid_2.png")
+	}
+	local level = require "levels.level1"
+	objects.asteroidFields = AsteroidFields(level.layers[2], asteroidSprites)
 end
 
 function love.keypressed(key)
@@ -80,6 +88,8 @@ function love.update(dt)
 	end
 	objects.ship:update(dt)
 	objects.minimap:update(dt)
+
+	objects.asteroidFields:update(dt)
 end
 
 function love.draw()
@@ -91,6 +101,7 @@ function love.draw()
 	)
 
 	objects.background:draw({x = objects.ship.x, y = objects.ship.y})
+	objects.asteroidFields:draw()
 	love.graphics.pop()
 
 	love.graphics.push()
@@ -113,6 +124,7 @@ function love.draw()
 		player:draw()
 	end
 	love.graphics.pop()
+
 
 	objects.minimap:draw()
 end

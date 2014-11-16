@@ -6,33 +6,29 @@ function GunControl(input, scaling)
 		x = 610,
 		y = 260,
 		animation = animation,
-width =  animation.width,
-	height = animation.height,
+		width =  animation.width,
+		height = animation.height,
 		firingAngle = 0.0,
 		radius = 1.0,
 		canFire = false,
 		doesFire = false,
 		scaling = scaling,
 	}
-	
+
+	spawn = ship:getSpawn()
+	gunControl.x = spawn.x
+	gunControl.y = spawn.y
+
 	gunControl.animation:load()
 	gunControl.radius = gunControl.height
 	gunControl.pivotx = gunControl.x 
 	gunControl.pivoty = gunControl.y - gunControl.height/2.0
 
-	--[[
-	spawn = ship:getSpawn()
-	gunControl.x = spawn.x
-	gunControl.y = spawn.y
-	--]]
-	--gunControl.gun.x = gunControl.x
-	--gunControl.gun.y = gunControl.y
-
 	gunControl.collider = shapes.newPolygonShape(
-		gunControl.x - gunControl.width/2.0, gunControl.y -gunControl.height/2.0,
-		gunControl.x + gunControl.width/2.0, gunControl.y -gunControl.height/2.0,
-		gunControl.x + gunControl.width/2.0, gunControl.y + gunControl.height/2.0,
-		gunControl.x - gunControl.width/2.0, gunControl.y + gunControl.height/2.0
+	gunControl.x - gunControl.width/2.0, gunControl.y - gunControl.height/2.0,
+	gunControl.x + gunControl.width/2.0, gunControl.y - gunControl.height/2.0,
+	gunControl.x + gunControl.width/2.0, gunControl.y + gunControl.height/2.0,
+	gunControl.x - gunControl.width/2.0, gunControl.y + gunControl.height/2.0
 	)
 
 	gunControl.pressed = false
@@ -41,30 +37,26 @@ width =  animation.width,
 		-- Set pressed to true when any player collides with me
 		players = objects.players
 		assert(players)
-	self.canFire = false
-						self.doesFire = false
-						self.pressed = false
+		self.canFire = false
+		self.doesFire = false
+		self.pressed = false
 
 		for i, player in ipairs(players) do
 			if self.collider:collidesWith(player.collider) then
-           --print(math.pow(math.pow(player.y - self.pivoty, 2.0) + math.pow(player.x - self.pivotx, 2.0),.5))
-					if self:computeUsability(player.x, player.y) then
-						self.canFire = true
-						self.firingAngle = self:computeFiringAngle(player.x, player.y)
-						--print(self.firingAngle)
+				if self:computeUsability(player.x, player.y) then
+					self.canFire = true
+					self.firingAngle = self:computeFiringAngle(player.x, player.y)
 
-						if player.isUsing then
-							self.pressed = true
-							self.doesFire = true
-						else
-							self.pressed = false
-							self.doesFire = false
-						end
+					if player.isUsing then
+						self.pressed = true
+						self.doesFire = true
+					else
+						self.pressed = false
+						self.doesFire = false
 					end
+				end
 			end
 		end
-		-- Pass input to ship
-		--objects.ship.controls[self.type] = self.pressed
 	end
 
 	function gunControl:draw()
@@ -75,7 +67,6 @@ width =  animation.width,
 			love.graphics.setColor(145, 145, 145)
 			self.animation:draw(self.x, self.y, 0.0, scaling)
 		end
-		--self.collider:draw("fill")
 	end
 
 	function gunControl:computeFiringAngle(playerX, playerY)
@@ -83,12 +74,9 @@ width =  animation.width,
 	end
 
 	function gunControl:computeUsability(playerX, playerY)
-		--if playerY < self.y and (math.sqrt((self.x - playerX)*(self.x - playerX) + (self.y - playerY)*(self.y - playerY)) < self.radius) then
-		--if playerY < self.y then
-			if playerY > self.pivoty and (math.pow(playerY - self.pivoty, 2.0) + math.pow(playerX - self.pivotx, 2.0) < math.pow(self.radius, 2.0)) then
-				return true
-			end
-		--end
+		if playerY > self.pivoty and (math.pow(playerY - self.pivoty, 2.0) + math.pow(playerX - self.pivotx, 2.0) < math.pow(self.radius, 2.0)) then
+			return true
+		end
 		return false
 	end
 
