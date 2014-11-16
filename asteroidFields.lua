@@ -8,12 +8,12 @@ function AsteroidFields(level, sprites)
 		fields = {} --contains all asteroid fields
 	}
 
+
 	for a, layer in ipairs(level.layers) do
 		if layer.name == "Asteroids" then
-
-			for i, obj in ipairs(layer.objects) do
+			for i, obj in pairs(layer.objects) do
 				--gets every asteroid field
-				asteroidFields.fields[obj.name] = {}
+				asteroidFields.fields[i] = {}
 
 				local x = 0
 				local y = 0
@@ -22,8 +22,12 @@ function AsteroidFields(level, sprites)
 				while y < obj.height do
 					while x < obj.width do
 						x = x + MIN + lume.random(0, RANGE)
-						local position = {['x'] = x, ['y'] = y + lume.random(0, RANGE)}
-						table.insert(asteroidFields.fields[obj.name], Asteroid(position, lume.randomchoice(sprites)))
+						local position = {
+							['x'] = x + obj.x,
+							['y'] = y + obj.y + lume.random(0, RANGE)
+						}
+						table.insert(asteroidFields.fields[i],
+						Asteroid(position, lume.randomchoice(sprites)))
 					end
 					y = y + RANGE
 				end
