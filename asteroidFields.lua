@@ -8,10 +8,10 @@ function AsteroidFields(level, sprites)
 		fields = {} --contains all asteroid fields
 	}
 
+
 	for a, layer in ipairs(level.layers) do
 		if layer.name == "Asteroids" then
-
-			for i, obj in ipairs(layer.objects) do
+			for i, obj in pairs(layer.objects) do
 				--gets every asteroid field
 				asteroidFields.fields[i] = {}
 

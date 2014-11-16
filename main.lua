@@ -42,10 +42,12 @@ function love.load()
 		love.graphics.newImage("images/asteroid_1.png"),
 		love.graphics.newImage("images/asteroid_2.png")
 	}
+
+	objects.asteroidFields = AsteroidFields(level, asteroidSprites)
+
 	music:play()
 
 	objects.ship = Ship(layout, level)
-	objects.asteroidFields = AsteroidFields(level, asteroidSprites)
 	objects.navigation = Navigation(layout)
 	objects.thrusters = Thrusters(layout)
 
@@ -57,15 +59,11 @@ function love.load()
 	objects.projectiles = {}
 	objects.weapons = {}
 	objects.gunControls = {}
+
 	objects.enemies = {
 		Enemy(50, 50)
 	}
 
-	local asteroidSprites = {
-		love.graphics.newImage("images/asteroid_1.png"),
-		love.graphics.newImage("images/asteroid_2.png")
-	}
-	objects.asteroidFields = AsteroidFields(level, asteroidSprites)
 end
 
 function love.keypressed(key)

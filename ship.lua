@@ -65,6 +65,7 @@ function Ship(layout, level)
 	end
 
 	-- Places ship in world based on level file
+	-- TODO
 	for i, layer in ipairs(level.layers) do
 		if layer.name == "Spawn" and layer.objects[1] then
 			ship.x = layer.objects[1].x
