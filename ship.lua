@@ -23,6 +23,7 @@ function Ship(layout, level)
 		MAX_SHIELD_STRENGTH = MAX_SHIELD_STRENGTH
 		
 	}
+	ship.worldCollider = shapes.newCircleShape(0, 0, 200)
 
 	ship.colliders = {}
 	ship.walls = {}
@@ -135,6 +136,9 @@ function Ship(layout, level)
 			objects.shake.intensity = self.velocity - SHAKE_THRESHOLD
 			objects.shake.length = 1
 		end
+
+		local coords = ship:getCoords()
+		ship.worldCollider:moveTo(coords.x, coords.y)
 	end
 
 	function rotatePoint(point, origin, degrees)

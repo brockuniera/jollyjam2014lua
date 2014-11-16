@@ -162,7 +162,7 @@ function love.update(dt)
 		end
 	end
 	for i, projectile in ipairs(objects.projectiles) do
-		if projectile.life <0 then
+		if projectile.life <= 0 then
 			table.remove(objects.projectiles, i)
 		else
 			projectile:update(dt)
@@ -178,7 +178,6 @@ function love.update(dt)
 		enemy:update(dt)
 	end
 	objects.ship:update(dt)
-	objects.ship.hullStrength = 100
 	objects.background:update(dt)
 	objects.minimap:update(dt)
 	blur:send("Blur", {objects.shake.offsetX, objects.shake.offsetY})
@@ -206,7 +205,6 @@ function love.draw()
 	for i, projectile in ipairs(objects.projectiles) do
 		projectile:draw()
 	end
-
 	love.graphics.pop()
 
 	love.graphics.push()
@@ -236,8 +234,6 @@ function love.draw()
 	love.graphics.setShader()
 	love.graphics.pop()
 
-		objects.ship.hullStrength =100
-		objects.ship.shieldStrength =35
 	--draw the hull strength bar for the ship
 		local healthWidth = objects.ship.hullStrength/objects.ship.MAX_HULL_STRENGTH*BAR_WIDTH
 		love.graphics.setColor(255,0,255)

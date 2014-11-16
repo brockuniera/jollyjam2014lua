@@ -1,6 +1,8 @@
 local SHOOT_DISTANCE = 1000
 local SHOOT_TIME = 1
 
+local EnemyProjectile = require "enemyProjectile"
+
 local enemySprites = {
 	love.graphics.newImage("images/Blue_Enemy.png"),
 	love.graphics.newImage("images/Cyan_Enemy.png"),
@@ -29,7 +31,7 @@ function Enemy(x, y)
 			self.shootTimer = self.shootTimer - dt
 			if self.shootTimer <= 0 then
 				self.shootTimer = SHOOT_TIME
-				--table.insert(objects.projectiles, Projectile("enemy", self.x, self.y, 0, 0, self.angle, .25, 0, 0))
+				table.insert(objects.projectiles, EnemyProjectile(self.x, self.y, self.angle))
 			end
 		end
 	end
