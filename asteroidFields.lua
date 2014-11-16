@@ -52,6 +52,10 @@ function AsteroidFields(level, sprites)
 		end
 	end
 
+	function asteroidFields:get()
+		return self.fields
+	end
+
 	return asteroidFields
 end
 

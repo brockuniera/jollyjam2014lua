@@ -50,6 +50,18 @@ function Minimap()
 
 			love.graphics.circle("fill", enemyX, enemyY, 4)
 		end
+
+		-- Asteroids
+
+		love.graphics.setColor(150, 60, 10)
+		for i, val in pairs(objects.asteroidFields:get()) do
+			for j, asteroid in pairs(val) do
+				local asteroidX = MARGIN + X + asteroid.x / WORLD_WIDTH
+				local asteroidY = MARGIN + Y + asteroid.y / WORLD_HEIGHT
+
+				love.graphics.circle("fill", asteroidX, asteroidY, 2)
+			end
+		end
 		
 		love.graphics.setColor(255, 255, 255)
 		love.graphics.rectangle("line", X, Y, WIDTH, HEIGHT)
