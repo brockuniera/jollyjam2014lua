@@ -53,7 +53,9 @@ function love.load()
 	objects.weapons = {}
 	objects.gunControls = {}
 	objects.enemies = {
-		Enemy(50, 50)
+		Enemy(50, 50),
+		Enemy(400, 400),
+		Enemy(1000, 1000),
 	}
 
 	local asteroidSprites = {
@@ -172,6 +174,11 @@ function love.draw()
 	end
 
 	objects.asteroidFields:draw()
+
+	for i, projectile in ipairs(objects.projectiles) do
+		projectile:draw()
+	end
+	
 	love.graphics.pop()
 
 	love.graphics.push()
@@ -181,10 +188,6 @@ function love.draw()
 		love.graphics.getHeight()/(scale*2) - 381/2 + objects.shake.offsetY
 	)
 	love.graphics.setShader(blur)
-
-	for i, projectile in ipairs(objects.projectiles) do
-		projectile:draw()
-	end
 	for i, gun in ipairs(objects.weapons) do
 		gun:draw()
 	end

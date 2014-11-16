@@ -69,6 +69,7 @@ function Ship(layout, level)
 		if layer.name == "Spawn" and layer.objects then
 			ship.x = layer.objects[1].x
 			ship.y = layer.objects[1].y
+			print(ship.x, ship.y)
 		end
 	end
 
@@ -146,6 +147,15 @@ function Ship(layout, level)
 		point = {
 			x = love.graphics.getWidth()/(scale*2) + self.x,
 			y = love.graphics.getHeight()/(scale*2) + self.y,
+		}
+		rotatePoint(point, self, self.angle)
+		return point
+	end
+
+	function ship:translateCoords(x, y)
+		point = {
+			x = love.graphics.getWidth()/(scale*2) + x + self.x - ship.image:getWidth()/2,
+			y = love.graphics.getHeight()/(scale*2) + y + self.y - ship.image:getHeight()/2,
 		}
 		rotatePoint(point, self, self.angle)
 		return point

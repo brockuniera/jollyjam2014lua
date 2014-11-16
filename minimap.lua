@@ -3,8 +3,8 @@ local Y = 5
 local MARGIN = 10
 local WIDTH = 200
 local HEIGHT = 200
-local WORLD_WIDTH = 4000
-local WORLD_HEIGHT = 4000
+local WORLD_WIDTH = 200
+local WORLD_HEIGHT = 200
 
 function Minimap()
 	minimap = {}
