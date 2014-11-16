@@ -146,10 +146,17 @@ function love.update(dt)
 			--print("Firing is possible")
 			objects.weapons[i]:update(gunControl.firingAngle)
 			if gunControl.doesFire and gunControl.timeSinceFired > gunControl.COOLDOWN then
-				love.audio.play(gunShotSound)				
-				table.insert(objects.projectiles, Projectile("player", gunControl.pivotx, gunControl.pivoty, -40, 150, gunControl.firingAngle - math.pi/2.0, .25, objects.ship.velocity, objects.ship.angle))
-				table.insert(objects.projectiles, Projectile("player", gunControl.pivotx, gunControl.pivoty, 0, 150, gunControl.firingAngle - math.pi/2.0, .25, objects.ship.velocity, objects.ship.angle))
-				table.insert(objects.projectiles, Projectile("player", gunControl.pivotx, gunControl.pivoty, 40, 150, gunControl.firingAngle - math.pi/2.0, .25, objects.ship.velocity, objects.ship.angle))
+				if i == 1 then
+					love.audio.play(gunShotSound)				
+					table.insert(objects.projectiles, Projectile("player", gunControl.pivotx, gunControl.pivoty, -40, 150, gunControl.firingAngle - math.pi/2.0 + math.pi, .25, objects.ship.velocity, objects.ship.angle))
+					table.insert(objects.projectiles, Projectile("player", gunControl.pivotx, gunControl.pivoty, 0, 150, gunControl.firingAngle - math.pi/2.0 + math.pi, .25, objects.ship.velocity, objects.ship.angle))
+					table.insert(objects.projectiles, Projectile("player", gunControl.pivotx, gunControl.pivoty, 40, 150, gunControl.firingAngle - math.pi/2.0 + math.pi, .25, objects.ship.velocity, objects.ship.angle))
+				elseif i == 2 then
+					love.audio.play(gunShotSound)				
+					table.insert(objects.projectiles, Projectile("player", gunControl.pivotx, gunControl.pivoty, -40, 150, gunControl.firingAngle - math.pi/2.0, .25, objects.ship.velocity, objects.ship.angle))
+					table.insert(objects.projectiles, Projectile("player", gunControl.pivotx, gunControl.pivoty, 0, 150, gunControl.firingAngle - math.pi/2.0, .25, objects.ship.velocity, objects.ship.angle))
+					table.insert(objects.projectiles, Projectile("player", gunControl.pivotx, gunControl.pivoty, 40, 150, gunControl.firingAngle - math.pi/2.0, .25, objects.ship.velocity, objects.ship.angle))
+				end
 				gunControl.timeSinceFired = 0.0
 			end
 		end
