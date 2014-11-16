@@ -12,7 +12,10 @@ function Asteroid(position, sprite)
 		turnVel = lume.random(-TURN_SPEED, TURN_SPEED)
 	}
 
-	asteroid.collider = shapes.newCircleShape(asteroid.image:getWidth() / 2, asteroid.image:getHeight() / 2, asteroid.image:getWidth() / 2)
+	asteroid.collider = shapes.newCircleShape(
+	asteroid.image:getWidth() / 2,
+	asteroid.image:getHeight() / 2,
+	asteroid.image:getWidth() / 2)
 
 	function asteroid:update(dt)
 		-- Float around predictably?
@@ -25,7 +28,9 @@ function Asteroid(position, sprite)
 
 	function asteroid:draw()
 		love.graphics.setColor(255,255,255)
-		love.graphics.draw(self.image, self.x, self.y, self.angle, 1, 1, self.image:getWidth()/2, self.image:getHeight()/2)
+		love.graphics.draw(self.image, self.x, self.y, self.angle,
+		1, 1, --scale
+		self.image:getWidth()/2, self.image:getHeight()/2) --offset
 	end
 
 	return asteroid

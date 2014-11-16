@@ -13,6 +13,7 @@ function Enemy(x, y)
 		sprite = lume.randomchoice(enemySprites),
 		angle = 0
 	}
+	enemy.collider = shapes.newCircleShape(x, y, 100)
 
 	function enemy:update(dt)
 		coords = objects.ship:getCoords()

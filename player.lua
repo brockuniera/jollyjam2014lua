@@ -80,6 +80,7 @@ function Player(input, scaling)
 			-- Controller input
 			velX = self.input:getGamepadAxis("leftx")
 			velY = self.input:getGamepadAxis("lefty")
+			local inputType, aIndex = self.input:getGamepadMapping("a")
 			self.isUsing = self.input:isDown(aIndex)
 
 			-- Deadzone
