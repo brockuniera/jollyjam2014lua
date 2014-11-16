@@ -20,6 +20,7 @@ local Player = require "player"
 local Projectile = require "projectile"
 local Gun = require "gun"
 local GunControl = require "gunControl"
+local Thrusters = require "thrusters"
 local Ship = require "ship"
 local Navigation = require "navigation"
 local Background = require "background"
@@ -41,6 +42,7 @@ function love.load()
 
 	objects.ship = Ship(layout, level)
 	objects.navigation = Navigation(layout)
+	objects.thrusters = Thrusters(layout)
 	objects.background = Background()
 	objects.minimap = Minimap()
 	objects.shake = Shake()
@@ -118,6 +120,9 @@ function love.update(dt)
 			projectile:update(dt)
 		end
 	end
+	for i, thr in ipairs(objects.thrusters) do
+		thr:update(dt)
+	end
 	for i, nav in ipairs(objects.navigation) do
 		nav:update(dt)
 	end
@@ -163,6 +168,9 @@ function love.draw()
 	end
 	for i, gun in ipairs(objects.weapons) do
 		gun:draw()
+	end
+	for i, thr in ipairs(objects.thrusters) do
+		thr:draw()
 	end
 	objects.ship:draw()
 	for i, gunControl in ipairs(objects.gunControls) do
