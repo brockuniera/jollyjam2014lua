@@ -27,13 +27,15 @@ local Background = require "background"
 local Minimap = require "minimap"
 local Shake = require "shake"
 local Enemy = require "enemy"
+local Asteroid = require "asteroid"
+local AsteroidFields = require "asteroidFields"
+local EnemyBuilder = require "enemyBuilder"
 
 local blur = love.graphics.newShader("lib/blur.frag")
 blur:send("CanvasSize", {love.graphics.getDimensions()})
 
 scale = .5
 
-local AsteroidFields = require "asteroidFields"
 
 function love.load()
 	local layout = require "content.shipLayout"
@@ -65,6 +67,8 @@ function love.load()
 		Enemy(400, 400),
 		Enemy(1000, 1000),
 	}
+
+	createEnemies(level)
 
 end
 

@@ -1,5 +1,3 @@
-local Asteroid = require "asteroid"
-
 local RANGE = 400 --max spread of asteroids
 local MIN = 100 --min spread of asteroids
 
