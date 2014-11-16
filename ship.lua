@@ -48,7 +48,7 @@ function Ship(layout, level)
 			end
 		elseif layer.name == "spawns" then
 			ship.spawns = layer.objects
-			lume.shuffle(ship.spawns)
+			--lume.shuffle(ship.spawns)
 		elseif layer.name == "walls" then
 			for j, obj in ipairs(layer.objects) do
 				local points = {}

@@ -29,7 +29,7 @@ function Enemy(x, y)
 			self.shootTimer = self.shootTimer - dt
 			if self.shootTimer <= 0 then
 				self.shootTimer = SHOOT_TIME
-				--
+				--table.insert(objects.projectiles, Projectile("enemy", self.x, self.y, 0, 0, self.angle, .25, 0, 0))
 			end
 		end
 	end

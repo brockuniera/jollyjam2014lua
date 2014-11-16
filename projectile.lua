@@ -3,26 +3,26 @@ local MOVE_SPEED = 800
 local INITIAL_LIFE = 400
 local DEADZONE = .2
 
-function Projectile(x, y, lateralOffset, radius, direction, scaling, shipVelocity, shipDirection)
+function Projectile(owner, x, y, lateralOffset, radius, direction, scaling, shipVelocity, shipDirection)
 	local animation = AnimatedSprite:create("images/Fireball_Purple.png", 200, 100,1, 1)
 	local projectile = {
 		x = 0,
 		y = 0,
 		vel = vel,
+		owner = owner,
 		life = INITIAL_LIFE,
                 lateralOffset = lateralOffset,
 		direction = direction,
-	animation = animation,
-	width =  animation.width,
-	height = animation.height,
-	direction = direction,
-	radius = radius,
-	isUsing = false,
-	scaling = scaling,
-	shipVel = shipVelocity,
-	shipDir = shipDirection,
-	aIndex
-
+		animation = animation,
+		width =  animation.width,
+		height = animation.height,
+		direction = direction,
+		radius = radius,
+		isUsing = false,
+		scaling = scaling,
+		shipVel = shipVelocity,
+		shipDir = shipDirection,
+		aIndex
 	}
 
 	local tempX = x + math.cos(direction)*radius + math.sin(direction)*projectile.lateralOffset
@@ -61,14 +61,17 @@ function Projectile(x, y, lateralOffset, radius, direction, scaling, shipVelocit
 				self.collider:moveTo(self.x, self.y)
 				self.life = self.life - dt*100
 				--print(self.life)
-
-				for i, enemy in ipairs(objects.enemies) do
-					if self.collider:collidesWith(enemy.collider) then
-						-- Destroy enemy
-						table.remove(objects.enemies, i)
-						self.life = 0
-						break
+				if self.owner == "player" then
+					for i, enemy in ipairs(objects.enemies) do
+						if self.collider:collidesWith(enemy.collider) then
+							-- Destroy enemy
+							table.remove(objects.enemies, i)
+							self.life = 0
+							break
+						end
 					end
+				elseif self.owner == "enemy" then
+					-- ship collision here
 				end
 	end
 
