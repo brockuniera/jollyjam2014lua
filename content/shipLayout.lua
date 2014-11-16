@@ -192,32 +192,8 @@ return {
           name = "",
           type = "",
           shape = "rectangle",
-          x = 250.109,
-          y = 48.846,
-          width = 0,
-          height = 0,
-          rotation = 0,
-          visible = true,
-          properties = {}
-        },
-        {
-          name = "",
-          type = "",
-          shape = "rectangle",
           x = 314.377,
           y = 187.802,
-          width = 0,
-          height = 0,
-          rotation = 0,
-          visible = false,
-          properties = {}
-        },
-        {
-          name = "",
-          type = "",
-          shape = "rectangle",
-          x = 247.077,
-          y = 322.243,
           width = 0,
           height = 0,
           rotation = 0,
@@ -233,7 +209,7 @@ return {
           width = 0,
           height = 0,
           rotation = 0,
-          visible = false,
+          visible = true,
           properties = {}
         }
       }
@@ -721,6 +697,39 @@ return {
       opacity = 1,
       image = "../images/Shield.png",
       properties = {}
+    },
+    {
+      type = "objectgroup",
+      name = "controls",
+      visible = true,
+      opacity = 1,
+      properties = {},
+      objects = {
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 250.109,
+          y = 48.846,
+          width = 0,
+          height = 0,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 247.077,
+          y = 322.243,
+          width = 0,
+          height = 0,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        }
+      }
     }
   }
 }

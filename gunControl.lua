@@ -21,7 +21,7 @@ function GunControl(input, scaling, players)
 		timeSinceFired = 0
 	}
 
-	spawn = ship:getSpawn()
+	spawn = ship:getCtrl()
 	gunControl.x = spawn.x
 	gunControl.y = spawn.y
 
