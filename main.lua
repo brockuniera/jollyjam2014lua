@@ -5,12 +5,14 @@ objects = {}
 
 -- Constructors
 local Player = require "player"
+local Projectile = require "projectile"
 local Gun = require "gun"
 local GunControl = require "gunControl"
 local Ship = require "ship"
 local Navigation = require "navigation"
 local Background = require "background"
 local Minimap = require "minimap"
+local Shake = require "shake"
 
 local AsteroidFields = require "asteroidFields"
 
@@ -21,6 +23,7 @@ function love.load()
 	objects.navigation = Navigation(layout)
 	objects.background = Background()
 	objects.minimap = Minimap()
+	objects.shake = Shake()
 	objects.players = {}
 	objects.projectiles = {}
 	objects.weapons = {}
@@ -77,19 +80,27 @@ function love.update(dt)
 		if gunControl.canFire then
 			--print("Firing is possible")
 			objects.weapons[i]:update(gunControl.firingAngle)
-			if gunControl.doesFire then
-				--table.insert(objects.projectiles, Projectile(
-				print("FIRE")
+			if gunControl.doesFire and gunControl.timeSinceFired > gunControl.COOLDOWN then
+				table.insert(objects.projectiles, Projectile(gunControl.pivotx, gunControl.pivoty, gunControl.firingAngle - math.pi/2.0, .125, objects.ship.velocity, objects.ship.angle))
+				gunControl.timeSinceFired = 0.0
 			end
+		end
+	end
+	for i, projectile in ipairs(objects.projectiles) do
+		if projectile.life <0 then
+			table.remove(objects.projectiles, i)
+		else
+			projectile:update(dt)
 		end
 	end
 	for i, nav in ipairs(objects.navigation) do
 		nav:update(dt)
 	end
 	objects.ship:update(dt)
+	objects.background:update(dt)
 	objects.minimap:update(dt)
-
 	objects.asteroidFields:update(dt)
+	shake:update(dt)
 end
 
 function love.draw()
@@ -106,10 +117,13 @@ function love.draw()
 
 	love.graphics.push()
 	love.graphics.translate(
-		love.graphics.getWidth()/2 - 550/2,
-		love.graphics.getHeight()/2 - 381/2
+		love.graphics.getWidth()/2 - 550/2 + objects.shake.offsetX,
+		love.graphics.getHeight()/2 - 381/2 + objects.shake.offsetY
 	)
 
+	for i, projectile in ipairs(objects.projectiles) do
+		projectile:draw()
+	end
 	for i, gun in ipairs(objects.weapons) do
 		gun:draw()
 	end
