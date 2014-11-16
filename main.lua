@@ -31,7 +31,7 @@ local Enemy = require "enemy"
 --local blur = love.graphics.newShader("lib/blur.frag")
 --blur:send("CanvasSize", {love.graphics.getDimensions()})
 
-scale = 1
+scale = .5
 
 local AsteroidFields = require "asteroidFields"
 
@@ -170,8 +170,7 @@ function love.draw()
 	for i, enemy in ipairs(objects.enemies) do
 		enemy:draw()
 	end
-	love.graphics.setColor(255,0,0)
-	love.graphics.rectangle("fill", 50, 50, 50, 50)
+
 	objects.asteroidFields:draw()
 	love.graphics.pop()
 
