@@ -25,7 +25,7 @@ local Ship = require "ship"
 local Navigation = require "navigation"
 local Background = require "background"
 local Minimap = require "minimap"
---local Shake = require "shake"
+local Shake = require "shake"
 local Enemy = require "enemy"
 
 --local blur = love.graphics.newShader("lib/blur.frag")
@@ -47,7 +47,7 @@ function love.load()
 	
 	objects.background = Background()
 	objects.minimap = Minimap()
-	--objects.shake = Shake()
+	objects.shake = Shake()
 	objects.players = {}
 	objects.projectiles = {}
 	objects.weapons = {}
@@ -170,17 +170,18 @@ function love.draw()
 	for i, enemy in ipairs(objects.enemies) do
 		enemy:draw()
 	end
-
+	love.graphics.setColor(255,0,0)
+	love.graphics.rectangle("fill", 50, 50, 50, 50)
 	objects.asteroidFields:draw()
 	love.graphics.pop()
 
 	love.graphics.push()
 	love.graphics.scale(scale, scale)
---	love.graphics.translate(
---		love.graphics.getWidth()/(scale*2) - 550/2 + objects.shake.offsetX,
---		love.graphics.getHeight()/(scale*2) - 381/2 + objects.shake.offsetY
---	)
---	love.graphics.setShader(blur)
+	love.graphics.translate(
+		love.graphics.getWidth()/(scale*2) - 550/2 + objects.shake.offsetX,
+		love.graphics.getHeight()/(scale*2) - 381/2 + objects.shake.offsetY
+	)
+	love.graphics.setShader(blur)
 
 	for i, projectile in ipairs(objects.projectiles) do
 		projectile:draw()
@@ -203,7 +204,7 @@ function love.draw()
 		player:draw()		
 	end
 			
-	--love.graphics.setShader()
+	love.graphics.setShader()
 	love.graphics.pop()
 
 

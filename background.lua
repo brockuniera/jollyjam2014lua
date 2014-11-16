@@ -6,8 +6,8 @@ function Background()
 	--constructor
 	local background = {}
 	background.image = love.graphics.newImage("images/background.png")
---	background.blur = love.graphics.newShader("lib/blur.frag")
-	--background.blur:send("CanvasSize", {love.graphics.getDimensions()})
+	background.blur = love.graphics.newShader("lib/blur.frag")
+	background.blur:send("CanvasSize", {love.graphics.getDimensions()})
 
 	function background:update(dt)
 		self.drawOffset = shipPosition
@@ -17,12 +17,12 @@ function Background()
 		local blurY = lume.clamp(
 			objects.ship.velocity * BLUR_FACTOR * math.sin(objects.ship.angle),
 			-MAX_BLUR, MAX_BLUR)
-	--	background.blur:send("Blur", {blurX, blurY})
+		background.blur:send("Blur", {blurX, blurY})
 	end
 
 	--draws a tiling background
 	function background:draw(shipPosition)
-		--love.graphics.setShader(background.blur)
+		love.graphics.setShader(background.blur)
 		love.graphics.setColor(255, 255, 255 )
 		local width = love.graphics.getWidth()/scale
 		local height = love.graphics.getHeight()/scale
@@ -34,7 +34,7 @@ function Background()
 				(j + math.floor(shipPosition.y / self.image:getHeight())) * self.image:getHeight())
 			end
 		end
-		--love.graphics.setShader()
+		love.graphics.setShader()
 	end
 
 	return background
