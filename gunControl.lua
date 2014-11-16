@@ -13,7 +13,7 @@ function GunControl(input, scaling)
 		canFire = false,
 		doesFire = false,
 		scaling = scaling,
-		COOLDOWN = 30,
+		COOLDOWN = 15,
 		timeSinceFired = 0
 	}
 

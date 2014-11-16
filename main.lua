@@ -2,7 +2,18 @@
 lume = require "lib.lume"
 shapes = require "lib.collider.shapes"
 objects = {}
+gunShotSound = love.audio.newSource("Sound/shot1.wav", "static") -- the "static" tells LÖVE to load the file into memory, good for short sound effects
+music = love.audio.newSource("Sound/TIMES.mp3") -- if "static" is omitted, LÖVE will stream the file from disk, good for longer music tracks
+music:setLooping()
 
+old_love_audio_play = love.audio.play
+function love.audio.play(source)
+  if not source:isStopped() then
+        source:rewind()
+  else
+        old_love_audio_play(source)
+  end
+end
 
 -- Constructors
 local Player = require "player"
@@ -26,6 +37,7 @@ local AsteroidFields = require "asteroidFields"
 function love.load()
 	local layout = require "content.shipLayout"
 	local level = require "levels.level1"
+	music:play()
 
 	objects.ship = Ship(layout, level)
 	objects.navigation = Navigation(layout)
@@ -60,7 +72,7 @@ function love.keypressed(key)
 		table.insert(objects.players, Player("keyboard", 2))
 		table.insert(objects.weapons, Gun("keyboard", 2))
 		table.insert(objects.gunControls, GunControl("keyboard", 1.00))
-		objects.weapons[#objects.weapons].x =objects.gunControls[#objects.gunControls].x
+		objects.weapons[#objects.weapons].x =objects.gunControls[#objects.gunControls].x +30
 		objects.weapons[#objects.weapons].y =objects.gunControls[#objects.gunControls].y
 
 	end
@@ -91,8 +103,11 @@ function love.update(dt)
 			--print("Firing is possible")
 			objects.weapons[i]:update(gunControl.firingAngle)
 			if gunControl.doesFire and gunControl.timeSinceFired > gunControl.COOLDOWN then
-				table.insert(objects.projectiles, Projectile(gunControl.pivotx, gunControl.pivoty, gunControl.firingAngle - math.pi/2.0, .125, objects.ship.velocity, objects.ship.angle))
-				gunControl.timeSinceFired = 0.0
+				love.audio.play(gunShotSound)				
+				table.insert(objects.projectiles, Projectile(gunControl.pivotx, gunControl.pivoty, -40, 150, gunControl.firingAngle - math.pi/2.0, .25, objects.ship.velocity, objects.ship.angle))
+				table.insert(objects.projectiles, Projectile(gunControl.pivotx, gunControl.pivoty, 0, 150, gunControl.firingAngle - math.pi/2.0, .25, objects.ship.velocity, objects.ship.angle))
+				table.insert(objects.projectiles, Projectile(gunControl.pivotx, gunControl.pivoty, 40, 150, gunControl.firingAngle - math.pi/2.0, .25, objects.ship.velocity, objects.ship.angle))
+				gunControl.timeSinceFired = 0.0				
 			end
 		end
 	end

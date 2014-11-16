@@ -29,7 +29,7 @@ function Gun(input, scaling)
 
 	-- Pick a spawn point
 	--spawn = ship:getSpawn()
-	--gun.x = spawn.x
+	--gun.x = spawn.x 
 	--gun.y = spawn.y
 
 	function gun:update(direction)
