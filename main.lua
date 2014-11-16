@@ -19,9 +19,15 @@ local AsteroidFields = require "asteroidFields"
 function love.load()
 	local layout = require "content.shipLayout"
 	local level = require "levels.level1"
+	local asteroidSprites = {
+		love.graphics.newImage("images/asteroid_1.png"),
+		love.graphics.newImage("images/asteroid_2.png")
+	}
 
 	objects.ship = Ship(layout, level)
+	objects.asteroidFields = AsteroidFields(level, asteroidSprites)
 	objects.navigation = Navigation(layout)
+
 	objects.background = Background()
 	objects.minimap = Minimap()
 	objects.shake = Shake()
@@ -29,12 +35,6 @@ function love.load()
 	objects.projectiles = {}
 	objects.weapons = {}
 	objects.gunControls = {}
-
-	local asteroidSprites = {
-		love.graphics.newImage("images/asteroid_1.png"),
-		love.graphics.newImage("images/asteroid_2.png")
-	}
-	objects.asteroidFields = AsteroidFields(level, asteroidSprites)
 end
 
 function love.keypressed(key)

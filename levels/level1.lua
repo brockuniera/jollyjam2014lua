@@ -38,13 +38,37 @@ return {
       properties = {},
       objects = {
         {
-          name = "Asteroid Belt",
+          name = "",
           type = "",
           shape = "rectangle",
-          x = 0,
-          y = 0,
-          width = 10000,
-          height = 590.07,
+          x = 9683.86,
+          y = 9484.19,
+          width = 0,
+          height = 0,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 8785.36,
+          y = 8985.02,
+          width = 1264.56,
+          height = 915.141,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 7670.55,
+          y = 8252.91,
+          width = 2312.81,
+          height = 1580.7,
           rotation = 0,
           visible = true,
           properties = {}
@@ -59,13 +83,13 @@ return {
       properties = {},
       objects = {
         {
-          name = "Spawn",
+          name = "",
           type = "",
           shape = "rectangle",
-          x = 604.462,
-          y = 500.284,
-          width = 88.7503,
-          height = 91.149,
+          x = 9034.94,
+          y = 9284.53,
+          width = 0,
+          height = 0,
           rotation = 0,
           visible = true,
           properties = {}
