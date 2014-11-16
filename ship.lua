@@ -17,6 +17,7 @@ function Ship(layout)
 	}
 
 	ship.colliders = {}
+	ship.walls = {}
 	ship.controls = {
 		left = false,
 		right = false,
@@ -28,7 +29,7 @@ function Ship(layout)
 	for i, layer in ipairs(layout.layers) do
 		if layer.name == "ground" then
 			for j, obj in ipairs(layer.objects) do
-				points = {}
+				local points = {}
 				for i, point in ipairs(obj.polygon) do
 					table.insert(points, obj.x + point.x)
 					table.insert(points, obj.y + point.y)
@@ -41,6 +42,18 @@ function Ship(layout)
 		elseif layer.name == "spawns" then
 			ship.spawns = layer.objects
 			lume.shuffle(ship.spawns)
+		elseif layer.name == "walls" then
+			for j, obj in ipairs(layer.objects) do
+				local points = {}
+				for i, point in ipairs(obj.polygon) do
+					table.insert(points, obj.x + point.x)
+					table.insert(points, obj.y + point.y)
+				end
+
+				wall = shapes.newPolygonShape(unpack(points))
+
+				table.insert(ship.walls, wall)
+			end
 		end
 	end
 
@@ -87,7 +100,7 @@ function Ship(layout)
 	function ship:draw()
 		love.graphics.setColor(255,255,255)
 		love.graphics.draw(self.image)
-		--[[for i, collider in ipairs(self.colliders) do
+		--[[\\for i, collider in ipairs(self.colliders) do
 			love.graphics.setColor(150, 150, 150)
 			collider:draw("fill")
 		end]]--
