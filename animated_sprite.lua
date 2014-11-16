@@ -61,7 +61,7 @@ function AnimatedSprite:draw(x, y, direction)
 	local drawx = x
 	local drawy = y
 	
-	love.graphics.drawq(self.sprite_sheet, self.sprites[self.current_frame], x, y, direction, 3, 3, self.width/2.0, self.height/2.0)
+	love.graphics.draw(self.sprite_sheet, self.sprites[self.current_frame], x, y, direction, 3, 3, self.width/2.0, self.height/2.0)
 
 end
 
