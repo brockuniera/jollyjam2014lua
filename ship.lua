@@ -52,6 +52,8 @@ function Ship(layout, level)
 		elseif layer.name == "spawns" then
 			ship.spawns = layer.objects
 			--lume.shuffle(ship.spawns)
+		elseif layer.name == "controls" then
+			ship.ctrls = layer.objects
 		elseif layer.name == "walls" then
 			for j, obj in ipairs(layer.objects) do
 				local points = {}
@@ -66,6 +68,11 @@ function Ship(layout, level)
 			end
 		end
 	end
+
+
+	--Switches control spawns
+	ctrl = table.remove(ship.ctrls, 1)
+	table.insert(ship.ctrls, ctrl)
 
 	-- Places ship in world based on level file
 	for i, layer in ipairs(level.layers) do
@@ -82,6 +89,13 @@ function Ship(layout, level)
 		table.insert(self.spawns, spawn)
 
 		return spawn
+	end
+
+	function ship:getCtrl()
+		ctrl = table.remove(self.ctrls, 1)
+		table.insert(self.ctrls, ctrl)
+
+		return ctrl
 	end
 
 	function ship:update(dt)
