@@ -2,9 +2,9 @@ require "animated_sprite"
 local MOVE_SPEED = 200
 local DEADZONE = .2
 
-function Player(input)
+function Player(input, scaling)
 
-	local animation = AnimatedSprite:create("hero.png", 32, 32, 4, 1)
+	local animation = AnimatedSprite:create("images/hero.png", 32, 32, 4, 1)
 	local player = {
 		x = 0,
 		y = 0,
@@ -17,7 +17,10 @@ function Player(input)
 		["Left"] = 2,
 		["Down"] = 3
 	},
-	direction = 0.0
+	direction = 0.0,
+	isUsing = false,
+	scaling = scaling,
+	aIndex
 
 	}
 
@@ -25,6 +28,9 @@ function Player(input)
 	player.animation:load()
 
 	player.input = input
+	if input ~= "keyboard" then
+		_, player.aIndex = player.input:getGamepadMapping("a")
+	end
 
 	-- Collider
 	player.collider = shapes.newPolygonShape(
@@ -62,10 +68,17 @@ function Player(input)
 			elseif love.keyboard.isDown("s") then
 				velY = MOVE_SPEED * dt
 			end
+
+			if love.keyboard.isDown(" ")then
+				self.isUsing = true
+			else
+				self.isUsing = false
+			end
 		else
 			-- Controller input
 			velX = self.input:getGamepadAxis("leftx")
 			velY = self.input:getGamepadAxis("lefty")
+			self.isUsing = self.input:isDown(aIndex)
 
 			-- Deadzone
 			if math.abs(velX) < DEADZONE then
@@ -129,8 +142,7 @@ function Player(input)
 	function player:draw()
 		love.graphics.setColor(145, 145, 145)
 		--self.collider:draw("fill")
-		self.animation:draw(self.x, self.y, self.direction)
-		print (self.direction)
+		self.animation:draw(self.x, self.y, self.direction, self.scaling)
 	end
 
 	return player

@@ -57,11 +57,11 @@ function AnimatedSprite:update(dt)
 end
 
 --Right is zero radians rotation, going clockwise, each new direction is additional pi/2 rotation
-function AnimatedSprite:draw(x, y, direction)
+function AnimatedSprite:draw(x, y, direction, scaling)
 	local drawx = x
 	local drawy = y
 	
-	love.graphics.draw(self.sprite_sheet, self.sprites[self.current_frame], x, y, direction, 3, 3, self.width/2.0, self.height/2.0)
+	love.graphics.drawq(self.sprite_sheet, self.sprites[self.current_frame], x, y, direction, scaling, scaling, self.width/2.0, self.height/2.0)
 
 end
 
