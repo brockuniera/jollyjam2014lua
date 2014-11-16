@@ -2,15 +2,18 @@ SHIP_X = 428
 SHIP_Y = 115
 
 local ACCEL = .5
-local TURN_SPEED = math.pi * .05
+local MAX_TURN_SPEED = math.pi * .1
+local TURN_ACCEL = math.pi * .0004
 local MAX_SPEED = 50
+local TURN_MULT = 2
 
 function Ship(layout)
 	local ship = {
 		angle = 0,
 		x = 0,
 		y = 0,
-		velocity = 0
+		velocity = 0,
+		angleVel = 0
 	}
 
 	ship.colliders = {}
@@ -58,11 +61,17 @@ function Ship(layout)
 		if self.controls.back then
 			self.velocity = self.velocity - ACCEL * dt
 		end
+
+		local turnAccel = TURN_ACCEL
+		if self.angleVel > 0 then
+			turnAccel = turnAccel * TURN_MULT
+		end
+
 		if self.controls.left then
-			self.angle = self.angle - TURN_SPEED * dt
+			self.angleVel = self.angleVel - turnAccel * dt
 		end
 		if self.controls.right then
-			self.angle = self.angle + TURN_SPEED * dt
+			self.angleVel = self.angleVel + turnAccel * dt
 		end
 
 		-- Calculate velocity
@@ -72,6 +81,7 @@ function Ship(layout)
 		-- Apply velocity
 		self.x = self.x + xVel
 		self.y = self.y + yVel
+		self.angle = self.angle + self.angleVel
 	end
 
 	function ship:draw()

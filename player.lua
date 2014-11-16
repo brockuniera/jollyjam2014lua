@@ -130,7 +130,6 @@ function Player(input)
 		love.graphics.setColor(145, 145, 145)
 		--self.collider:draw("fill")
 		self.animation:draw(self.x, self.y, self.direction)
-		print (self.direction)
 	end
 
 	return player

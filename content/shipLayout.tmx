@@ -21,16 +21,16 @@
   </object>
  </objectgroup>
  <objectgroup name="spawns">
-  <object x="247.109" y="107.513"/>
-  <object x="405.71" y="231.802"/>
-  <object x="254.41" y="263.91"/>
-  <object x="104.801" y="187.993"/>
+  <object x="265.109" y="182.846"/>
+  <object x="314.377" y="187.802"/>
+  <object x="241.077" y="227.243"/>
+  <object x="198.134" y="182.659"/>
  </objectgroup>
  <objectgroup color="#2aa400" name="navigation">
-  <object type="left" x="430" y="125" width="40" height="40"/>
-  <object type="back" x="385" y="170" width="40" height="40"/>
-  <object type="right" x="430" y="215" width="40" height="40"/>
-  <object type="forward" x="430" y="170" width="40" height="40"/>
+  <object type="left" x="402" y="125" width="40" height="40"/>
+  <object type="back" x="357" y="170" width="40" height="40"/>
+  <object type="right" x="402" y="215" width="40" height="40"/>
+  <object type="forward" x="446" y="170" width="40" height="40"/>
  </objectgroup>
  <objectgroup name="weapons"/>
 </map>
