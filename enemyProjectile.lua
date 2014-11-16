@@ -17,10 +17,10 @@ function EnemyProjectile(x, y, angle)
 
 		if objects.ship.worldCollider:contains(self.x, self.y) then
 			self.life = 0
-			if ship.shieldStrength > 0 then
-				ship.shieldStrength = ship.shieldStrength - 5
+			if objects.ship.shieldStrength > 0 then
+				objects.ship.shieldStrength = objects.ship.shieldStrength - 5
 			else
-				ship.hullStrength = ship.hullStrength - 1
+				objects.ship.hullStrength = objects.ship.hullStrength - 1
 			end
 		end
 	end
