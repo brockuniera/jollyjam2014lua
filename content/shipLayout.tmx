@@ -27,10 +27,10 @@
   <object x="104.801" y="187.993"/>
  </objectgroup>
  <objectgroup color="#2aa400" name="navigation">
-  <object type="left" x="428" y="125.667" width="42" height="40"/>
-  <object type="back" x="380" y="171.667" width="42" height="40"/>
-  <object type="right" x="428" y="216.667" width="42" height="40"/>
-  <object type="forward" x="428" y="171.667" width="42" height="40"/>
+  <object type="left" x="430" y="125" width="40" height="40"/>
+  <object type="back" x="385" y="170" width="40" height="40"/>
+  <object type="right" x="430" y="215" width="40" height="40"/>
+  <object type="forward" x="430" y="170" width="40" height="40"/>
  </objectgroup>
  <objectgroup name="weapons"/>
 </map>
