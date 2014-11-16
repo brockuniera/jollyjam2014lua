@@ -3,6 +3,12 @@
  <imagelayer name="ship">
   <image source="../images/Body_Small.png"/>
  </imagelayer>
+ <objectgroup name="thruster">
+  <object type="left" x="-349.5" y="-139.5" width="601" height="225"/>
+ </objectgroup>
+ <objectgroup name="thruster">
+  <object type="right" x="-355" y="303" width="601" height="225"/>
+ </objectgroup>
  <objectgroup name="ground">
   <object x="164" y="124">
    <polygon points="0,0 17.3333,-107.333 43.3333,-116 81.3333,-114 136.667,-100 160.667,-90.6667 174.545,0.727273"/>

@@ -12,10 +12,54 @@ return {
     {
       type = "imagelayer",
       name = "ship",
+      x = 0,
+      y = 0,
       visible = true,
       opacity = 1,
       image = "../images/Body_Small.png",
       properties = {}
+    },
+    {
+      type = "objectgroup",
+      name = "thruster",
+      visible = true,
+      opacity = 1,
+      properties = {},
+      objects = {
+        {
+          name = "",
+          type = "left",
+          shape = "rectangle",
+          x = -349.5,
+          y = -139.5,
+          width = 601,
+          height = 225,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        }
+      }
+    },
+    {
+      type = "objectgroup",
+      name = "thruster",
+      visible = true,
+      opacity = 1,
+      properties = {},
+      objects = {
+        {
+          name = "",
+          type = "right",
+          shape = "rectangle",
+          x = -355,
+          y = 303,
+          width = 601,
+          height = 225,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        }
+      }
     },
     {
       type = "objectgroup",
