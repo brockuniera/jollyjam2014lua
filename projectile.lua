@@ -3,7 +3,7 @@ local MOVE_SPEED = 400
 local INITIAL_LIFE = 200
 local DEADZONE = .2
 
-function Projectile(x,y, direction, scaling)
+function Projectile(x,y, direction, scaling, shipVelocity, shipDirection)
 
 	local animation = AnimatedSprite:create("images/fireball.png", 258, 258, 1, 1)
 	local projectile = {
@@ -18,6 +18,8 @@ function Projectile(x,y, direction, scaling)
 	direction = direction,
 	isUsing = false,
 	scaling = scaling,
+	shipVel = shipVelocity,
+	shipDir = shipDirection,
 	aIndex
 
 	}
@@ -40,8 +42,8 @@ function Projectile(x,y, direction, scaling)
 	end
 
 	function projectile:update(dt)
-				self.velX = MOVE_SPEED * dt * math.cos(self.direction) 
-				self.velY = MOVE_SPEED * dt * math.sin(self.direction) 
+				self.velX = MOVE_SPEED * dt * math.cos(self.direction) + self.shipVel*dt*math.cos(self.shipDir)
+				self.velY = MOVE_SPEED * dt * math.sin(self.direction) + self.shipVel*dt*math.sin(self.shipDir)
 				self.animation:set_animation(true)
 				self.animation:update(dt)
 				

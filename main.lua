@@ -71,7 +71,7 @@ function love.update(dt)
 			--print("Firing is possible")
 			objects.weapons[i]:update(gunControl.firingAngle)
 			if gunControl.doesFire and gunControl.timeSinceFired > gunControl.COOLDOWN then
-				table.insert(objects.projectiles, Projectile(gunControl.pivotx, gunControl.pivoty, gunControl.firingAngle - math.pi/2.0, .125))
+				table.insert(objects.projectiles, Projectile(gunControl.pivotx, gunControl.pivoty, gunControl.firingAngle - math.pi/2.0, .125, objects.ship.velocity, objects.ship.angle))
 				gunControl.timeSinceFired = 0.0
 			end
 		end
