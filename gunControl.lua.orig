@@ -59,9 +59,12 @@ function GunControl(input, scaling)
 				end
 			end
 		end
+<<<<<<< HEAD
+=======
 		-- Pass input to ship
 		--objects.ship.controls[self.type] = self.pressed
 		self.timeSinceFired = self.timeSinceFired + dt*100
+>>>>>>> f6bb6afc153014f79da35afccfabf0a40f52b1d9
 	end
 
 	function gunControl:draw()

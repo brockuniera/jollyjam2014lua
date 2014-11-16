@@ -21,10 +21,13 @@ blur:send("CanvasSize", {love.graphics.getDimensions()})
 
 scale = 1
 
+local AsteroidFields = require "asteroidFields"
+
 function love.load()
 	local layout = require "content.shipLayout"
+	local level = require "levels.level1"
 
-	objects.ship = Ship(layout)
+	objects.ship = Ship(layout, level)
 	objects.navigation = Navigation(layout)
 	objects.background = Background()
 	objects.minimap = Minimap()
@@ -36,7 +39,12 @@ function love.load()
 	objects.enemies = {
 		Enemy(50, 50)
 	}
-	--objects.player = Player("keyboard")
+
+	local asteroidSprites = {
+		love.graphics.newImage("images/asteroid_1.png"),
+		love.graphics.newImage("images/asteroid_2.png")
+	}
+	objects.asteroidFields = AsteroidFields(level, asteroidSprites)
 end
 
 function love.keypressed(key)
@@ -104,8 +112,9 @@ function love.update(dt)
 	objects.ship:update(dt)
 	objects.background:update(dt)
 	objects.minimap:update(dt)
-	objects.shake:update(dt)
 	blur:send("Blur", {objects.shake.offsetX, objects.shake.offsetY})
+	objects.asteroidFields:update(dt)
+	shake:update(dt)
 end
 
 function love.draw()
@@ -117,12 +126,13 @@ function love.draw()
 		-objects.ship.y
 	)
 
-	objects.background:draw({x = objects.ship.x, y = objects.ship.y})-- Enemies
+	objects.background:draw({x = objects.ship.x, y = objects.ship.y})
+	-- Enemies
 	for i, enemy in ipairs(objects.enemies) do
 		enemy:draw()
 	end
-	love.graphics.setColor(255,0,0)
 
+	objects.asteroidFields:draw()
 	love.graphics.pop()
 
 	love.graphics.push()
@@ -151,6 +161,7 @@ function love.draw()
 	end
 	love.graphics.setShader()
 	love.graphics.pop()
+
 
 	objects.minimap:draw()
 
