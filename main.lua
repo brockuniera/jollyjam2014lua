@@ -187,6 +187,7 @@ function love.draw()
 		gun:draw()
 	end
 	for i, thr in ipairs(objects.thrusters) do
+		--assert(i<2)
 		thr:draw()
 	end
 	objects.ship:draw()

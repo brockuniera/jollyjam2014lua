@@ -161,12 +161,11 @@ function Ship(layout, level)
 		if self.shieldStrength > 0 then
 			love.graphics.setColor(self.shieldStrength,self.shieldStrength,self.shieldStrength)
 			--love.graphics.draw(self.shieldImage, 200- self.shieldImage:getWidth()/2.0, 200- self.shieldImage:getHeight()/2.0)
-	for i, layer in ipairs(layout.layers) do
-		if layer.name=="shield" then
-			assert(false)
+	--[[for i, layer in ipairs(layout.layers) do
+		if layer.name=="shield" then			
 			love.graphics.draw(self.shieldImage, layer.objects[1].x, layer.objects[1].y)
 		end
-	end
+	end--]]
 						
 		end
 	end

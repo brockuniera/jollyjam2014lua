@@ -7,7 +7,7 @@
   <object type="left" x="-349.5" y="-139.5" width="601" height="225"/>
  </objectgroup>
  <objectgroup name="thruster">
-  <object type="right" x="-355" y="303" width="601" height="225"/>
+  <object type="right" x="-350" y="-140" width="601" height="225"/>
  </objectgroup>
  <objectgroup name="ground">
   <object x="164" y="124">
