@@ -43,6 +43,8 @@ function love.load()
 	objects.ship = Ship(layout, level)
 	objects.navigation = Navigation(layout)
 	objects.thrusters = Thrusters(layout)
+
+	
 	objects.background = Background()
 	objects.minimap = Minimap()
 	--objects.shake = Shake()
